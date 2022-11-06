@@ -1,0 +1,27 @@
+{
+    "name": "TLDR",
+    "version": "0.1",
+    "manifest_version": 3,
+    "permissions": ["activeTab", "scripting", "notifications"],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "action": {
+        "default_title": "Click to show an alert"
+    },
+    "web_accessible_resources": [{
+            "resources": ["styles.css"],
+            "matches": ["<all_urls>"]
+        },
+
+        {
+            "resources": ["build/bundle.js"],
+            "matches": ["<all_urls>"]
+        },
+
+        {
+            "resources": ["build/index.html"],
+            "matches": ["<all_urls>"]
+        }
+    ]
+}
