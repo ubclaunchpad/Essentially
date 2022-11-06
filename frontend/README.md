@@ -21,7 +21,7 @@ The UI is bundled to be put in the extension folder. This provides flexibility t
 
 1. make sure you are in the `frontend` directory
 
-2. Run `npm start:dev` to run the application
+2. Run `npm run start:dev` to run the application
 
 3. the application will run on `http://localhost:8080/`
 
