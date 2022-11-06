@@ -1,4 +1,9 @@
-### Installation
+# Broswer extension for TL;DR
+
+This folder contains the main React UI for the extension
+The UI is bundled to be put in the extension folder. This provides flexibility to trnasform the UI into more than an extension later on
+
+## Installation
 
 1. Clone the repository
 
@@ -12,7 +17,7 @@
 
 4. Run `npm install` to install all relevant packages
 
-### Running the UI
+## Running the UI
 
 1. make sure you are in the `frontend` directory
 
@@ -20,9 +25,7 @@
 
 3. the application will run on `http://localhost:8080/`
 
-### Running the UI as the extension on Chrome
-
-#### First time setup
+## Running the UI as the extension on Chrome
 
 1. make sure you are in the `frontend` directory
 
