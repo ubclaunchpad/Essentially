@@ -20,6 +20,7 @@ function addstylesheet(filename) {
     link.rel = 'stylesheet'
     document.getElementsByTagName('head')[0].appendChild(link)
 }
+
 const newdiv = document.createElement('div')
 newdiv.setAttribute('id', 'overlay')
 addstylesheet('styles.css')

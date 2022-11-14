@@ -1,29 +1,24 @@
 import './App.css';
 import { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 function App() {
 
-  const [text, setText] = useState<any>();
+  const navigate = useNavigate();
 
-  useEffect(() => {
-      console.log(location);
-      fetch('http://localhost:3000/', {
-          method: 'GET',
-      })
-          .then((res : any) => {
-              return res.text();
-          })
-          .then((text : string) => {
-              setText(text);
-          });
-  }, [])
+
+  const getArticle = () => {
+      navigate("/article");
+  }
 
   return (
     <div>
-      <h1>{text}</h1>
+      <h1>TLDR</h1>
       {process.env.name === 'DEVELOPMENT' && <h2>Running Development Mode</h2>}
+    <button onClick={getArticle}>
+        Get Article
+    </button>
     </div>
   );
 }

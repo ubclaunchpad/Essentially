@@ -20,7 +20,7 @@ This folder contains code to run the server for TL;DR
 
 1. make sure you are in the `backend` directory
 
-2. Run `node backend_test.js` to run the server
+2. Run `node get_article_text.js` to run the server
 
 3. the server will run on `http://localhost:3000/`
 
