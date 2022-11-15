@@ -2,7 +2,7 @@ const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 const readability = require('@mozilla/readability');
 const { Readability } = readability;
-const express = require('express');
+import express from 'express';
 const cors = require('cors');
 const app = express();
 const port = 3000;
@@ -11,7 +11,7 @@ app.use(express.text())
 
 app.use(cors());
 
-app.post('/article', (req, res) => {
+app.post('/article', (req : express.Request, res: express.Response ) => {
     const url = req.body;
     fetch(url)
         .then((res) => res.text())
@@ -40,7 +40,6 @@ app.post('/article', (req, res) => {
 
 
 })
-
 
 
 
