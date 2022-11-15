@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import './App.css';
+import { useNavigate } from 'react-router-dom'
 
 interface IArticleData {
     title: string,
@@ -10,6 +11,8 @@ interface IArticleData {
 }
 
 function Article() {
+    const navigate = useNavigate();
+
     const [url, setUrl] = useState<string>();
     const [article, setArticle] = useState<any>([]);
 
@@ -37,6 +40,10 @@ function Article() {
         }
     }, [url]);
 
+    const mainMenu = () => {
+        navigate('/');
+    }
+
 
     return (
         <div>
@@ -52,6 +59,9 @@ function Article() {
                     );
                 })}
             </div>
+            <button onClick={mainMenu}>
+                Back
+            </button>
             <button>
                 Summarize
             </button>

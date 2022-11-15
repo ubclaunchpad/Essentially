@@ -27,7 +27,7 @@ app.post('/article', (req : express.Request, res: express.Response ) => {
 
                 const text = text_element.innerHTML;
 
-                if (text.charAt(0) != '<' && !(span_regex.exec(text))) {
+                if (text.charAt(0) !== '<' && !(span_regex.exec(text))) {
                     all_text.push(text.replaceAll(a_tag_regex, ""));
                 }
 
