@@ -1,7 +1,5 @@
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
-const readability = require('@mozilla/readability');
-const { Readability } = readability;
 import express from 'express';
 const cors = require('cors');
 const app = express();
