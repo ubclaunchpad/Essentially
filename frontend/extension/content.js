@@ -7,15 +7,7 @@ function addstylesheet(filename) {
     document.getElementsByTagName('head')[0].appendChild(link);
 }
 
-const newdiv = document.createElement('div');
-newdiv.setAttribute('id', 'overlay');
 addstylesheet('styles.css');
-const i = document.createElement('iframe');
-i.src = chrome.runtime.getURL('build/index.html');
-i.setAttribute('scrolling', 'no');
-newdiv.appendChild(i);
-org_html = document.body.innerHTML;
-document.body.appendChild(newdiv);
 
 function getPageText() {
     let res = [];

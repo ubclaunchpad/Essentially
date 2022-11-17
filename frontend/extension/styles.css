@@ -10,37 +10,44 @@ main {
 }
 
 #overlay {
+    width: 100vw;
+    height: 100vh;
     top: 2px;
     right: 2px;
     bottom: initial;
     left: initial;
     z-index: 2147483647 !important;
     position: fixed !important;
-    background-color: rgb(236, 236, 236);
-    z-index: 2;
+    background: none;
     padding: 0;
-    margin: 10px 20px;
     cursor: pointer;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-    box-shadow: rgba(117, 117, 128, 0.42) 0px 7px 29px 0px;
 }
 
 iframe {
-    width: 100%;
-    min-height: 40vh;
+    width: 100vw;
+    height: 100vh;
     padding: 0;
     margin: 0;
+    top: 0;
+    right: 0;
     border: none;
+    z-index: 2147483647 !important;
+    position: fixed !important;
+    background-color: transparent;
+    margin: 0;
+    box-shadow: rgba(117, 117, 128, 0.42) 0px 7px 29px 0px;
+    resize: both;
 }
 
 .text {
     font-size: 10px;
     color: white;
-    background-color: rgba(53, 61, 102, 0.991);
+    background-color: rgba(188, 189, 190, 0.991);
     border-radius: 6px;
     padding: 0px;
     border: none;
