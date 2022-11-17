@@ -23,5 +23,14 @@
             "resources": ["build/index.html"],
             "matches": ["<all_urls>"]
         }
+    ],
+    "content_scripts": [{
+            "matches": ["http://*/*", "https://*/*"],
+            "js": ["./build/bundle.js"]
+        },
+        {
+            "matches": ["http://*/*", "https://*/*"],
+            "js": ["./content.js"]
+        }
     ]
 }
