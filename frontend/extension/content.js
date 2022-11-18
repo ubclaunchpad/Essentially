@@ -29,3 +29,19 @@ function getPageText() {
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     sendResponse({ text: getPageText() });
 });
+
+window.addEventListener('mouseup', wordSelected);
+
+function wordSelected() {
+    let selectedText = window.getSelection().toString();
+    console.log(selectedText);
+    if (selectedText.length > 0) {
+        let message = {
+            text: selectedText,
+        };
+        chrome.runtime.sendMessage(message);
+        const boxp = document.createElement('p');
+        boxp.setAttribute('id', 'box');
+        document.body.appendChild(boxp);
+    }
+}
