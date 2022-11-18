@@ -49,3 +49,9 @@ iframe {
     outline-style: none;
     margin: 10px;
 }
+
+#box{
+    background-color: yellowgreen;
+    width: 800px;
+    min-height: 800px;
+}

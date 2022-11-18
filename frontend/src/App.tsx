@@ -7,18 +7,6 @@ function App() {
 
   const [text, setText] = useState<any>();
 
-  useEffect(() => {
-      console.log(location);
-      fetch('http://localhost:3000/', {
-          method: 'GET',
-      })
-          .then((res : any) => {
-              return res.text();
-          })
-          .then((text : string) => {
-              setText(text);
-          });
-  }, [])
 
   return (
     <div>
