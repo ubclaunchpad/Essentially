@@ -1,24 +1,13 @@
 import './App.css';
-import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom';
-
+import { useState, useEffect } from 'react';
 
 function App() {
-
-  const navigate = useNavigate();
-
-
-  const getArticle = () => {
-      navigate("/article");
-  }
+  const [text, setText] = useState<any>();
 
   return (
     <div>
-      <h1>TLDR</h1>
+      <h1>{text}</h1>
       {process.env.name === 'DEVELOPMENT' && <h2>Running Development Mode</h2>}
-    <button onClick={getArticle}>
-        Get Article
-    </button>
     </div>
   );
 }
