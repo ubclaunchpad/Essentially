@@ -3,8 +3,11 @@
 This folder contains the Backend for Summarization-related services. Written in Python using Flask as the framework. Also contains Jupyter Notebook files for machine learning experimentation and testing.
 
 `ml_notebook` is to store Jupyter Notebook files.
+
 `routes` is where the API endpoints are defined.
+
 `services` is where the actual logic for the endpoints are located.
+
 `utils` is for common functions that are used within services; it's fore utility functions.
 
 ## Installation
