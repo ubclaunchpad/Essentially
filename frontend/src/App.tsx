@@ -1,12 +1,8 @@
 import './App.css';
-import { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom';
-
+import { useState, useEffect } from 'react';
 
 function App() {
-
   const [text, setText] = useState<any>();
-
 
   return (
     <div>

@@ -1,4 +1,9 @@
 import ReactDOM from 'react-dom';
-import App from './App';
+import { MemoryRouter } from 'react-router-dom'
+import AllRoutes from "./AllRoutes"
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+    <MemoryRouter>
+        <AllRoutes />
+    </MemoryRouter>
+    , document.getElementById('root'));
