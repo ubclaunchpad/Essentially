@@ -20,6 +20,7 @@ function addstylesheet(filename) {
     link.rel = 'stylesheet'
     document.getElementsByTagName('head')[0].appendChild(link)
 }
+
 const newdiv = document.createElement('div')
 newdiv.setAttribute('id', 'overlay')
 addstylesheet('styles.css')
@@ -29,3 +30,19 @@ i.setAttribute('scrolling', 'no')
 newdiv.appendChild(i)
 org_html = document.body.innerHTML
 document.body.appendChild(newdiv)
+
+window.addEventListener('mouseup', wordSelected);
+
+function wordSelected(){
+    let selectedText = window.getSelection().toString();
+    console.log(selectedText);
+    if(selectedText.length > 0){
+        let message = {
+            text : selectedText
+        };
+        chrome.runtime.sendMessage(message);
+        const boxp = document.createElement('p');
+        boxp.setAttribute('id', 'box');
+        document.body.appendChild(boxp);
+    }
+}
