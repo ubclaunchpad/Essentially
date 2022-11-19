@@ -31,3 +31,7 @@ This folder contains the Backend for Summarization-related services. Written in 
 Note: If you need to install new Python packages, make sure you run `pip freeze > requirements.txt` so that other developers will know to download the package as well.
 
 Run `deactivate` to deactivate the virtual environment.
+
+## API Endpoints
+
+- [Endpoints documentation](https://docs.google.com/document/d/1Z19GKOGJVhKviADtvBEPEok53qLszR71e5_4Dz2MTGw/edit#)
