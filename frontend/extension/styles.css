@@ -9,49 +9,18 @@ main {
     border-radius: 10px;
 }
 
-#overlay {
-    top: 2px;
-    right: 2px;
-    bottom: initial;
-    left: initial;
-    z-index: 2147483647 !important;
-    position: fixed !important;
-    background-color: rgb(236, 236, 236);
-    z-index: 2;
-    padding: 0;
-    margin: 10px 20px;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    box-shadow: rgba(117, 117, 128, 0.42) 0px 7px 29px 0px;
-}
-
-iframe {
-    width: 100%;
-    min-height: 40vh;
+#essentially-extension-v1-lp {
     padding: 0;
     margin: 0;
+    top: 0;
+    right: 0;
+    width: 600px;
+    height: 100vh;
     border: none;
-}
-
-.text {
-    font-size: 10px;
-    color: white;
-    background-color: rgba(53, 61, 102, 0.991);
-    border-radius: 6px;
-    padding: 0px;
-    border: none;
-    outline: none;
-    transform: none;
-    outline-style: none;
-    margin: 10px;
-}
-
-#box{
-    background-color: yellowgreen;
-    width: 800px;
-    min-height: 800px;
+    z-index: 2147483647 !important;
+    position: fixed !important;
+    background-color: transparent;
+    margin: 0;
+    resize: both;
+    overflow: auto;
 }
