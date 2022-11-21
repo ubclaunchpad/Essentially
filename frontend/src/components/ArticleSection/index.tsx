@@ -22,12 +22,14 @@ export default function Article(props: ArticleProps) {
   const pageTitle = props.title || props.website || 'No Title Found';
 
   const generateReadTime = () => {
-    const readInMinutes = props.body.join(' ').length / 200;
+    const readInMinutes = props.body.join().split(' ').length / 200;
     if (readInMinutes < 1) {
       setReadTime('less than a minute');
     } else if (readInMinutes > 60) {
       setReadTime(
-        `< ${readInMinutes / 60} hours and ${readInMinutes % 60} minutes`
+        `< ${(readInMinutes / 60).toFixed(0)} hour(s) and ${(
+          readInMinutes % 60
+        ).toFixed(0)} minutes`
       );
     } else {
       setReadTime(`< ${Math.ceil(readInMinutes)} minutes`);
