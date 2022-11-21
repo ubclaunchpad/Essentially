@@ -1,4 +1,4 @@
-# Project TL;DR
+# Project Essentially
 
 ### About the Project
 
