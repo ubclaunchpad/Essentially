@@ -5,45 +5,20 @@ chrome.action.onClicked.addListener((tab) => {
     });
 });
 
-// chrome.action.onClicked.addListener((tab) => {
-//     chrome.scripting.executeScript({
-//         target: { tabId: tab.id },
-//         files: ['content.js'],
-//     });
-// });
-
-// chrome.chrome.tabs.query({ active: true, currentWindow: true },
-//     function(tabs) {
-//         console.log(tabs);
-//         chrome.tabs.sendMessage(
-//             tabs[0].id, { greeting: 'hello' },
-//             function(response) {
-//                 console.log('hello');
-//                 console.log(response);
-//             }
-//         );
-//     }
-// );
-
+// TODO: Iframe dynamic sizing issues: needd to actively send size change messages so iframe can adjust its size or iframe will block the page
 function run() {
-    console.log('aa');
-    console.log(document.getElementById('amsmdjdnkne3kfwnlfnnfljnaa'));
-    if (document.getElementById('amsmdjdnkne3kfwnlfnnfljnaa')) {
-        document.getElementById('amsmdjdnkne3kfwnlfnnfljnaa').remove();
-
-        console.log('aa');
+    const EXTENSION_IFRAME_ID = 'essentially-extension-v1-lp';
+    if (document.getElementById(EXTENSION_IFRAME_ID)) {
+        document.getElementById(EXTENSION_IFRAME_ID).remove();
     } else {
-        const newdiv = document.createElement('div');
-        newdiv.setAttribute('id', 'overlay');
-        const i = document.createElement('iframe');
-        i.setAttribute('id', 'amsmdjdnkne3kfwnlfnnfljnaa');
-        i.src = chrome.runtime.getURL('build/index.html');
-        i.setAttribute('scrolling', 'no');
-        newdiv.appendChild(i);
-        org_html = document.body.innerHTML;
-        document.body.appendChild(i);
-        console.log('aa');
-        console.log(document.getElementById('amsmdjdnkne3kfwnlfnnfljnaa'));
+        const extensionFrame = document.createElement('iframe');
+        extensionFrame.setAttribute('id', EXTENSION_IFRAME_ID);
+        extensionFrame.sandbox.add('allow-scripts');
+        extensionFrame.sandbox.add('allow-same-origin');
+        extensionFrame.fetchPriority = 'high';
+        extensionFrame.setAttribute('scrolling', 'no');
+        extensionFrame.src = chrome.runtime.getURL('build/index.html');
+        document.body.appendChild(extensionFrame);
     }
 }
 
@@ -56,6 +31,6 @@ chrome.action.onClicked.addListener((tab) => {
 
 chrome.runtime.onMessage.addListener(receiver);
 
-function receiver(request, sender, sendResponse){
-    console.log(request); 
+function receiver(request, sender, sendResponse) {
+    console.log(request);
 }
