@@ -45,7 +45,7 @@ export default function Article(props: ArticleProps) {
 
     fetch("http://localhost:3000/keyword", requestOptions)
         .then(res => res.json())
-        .then(data => setkeywords(['Keywords:'].concat(data)))
+        .then(data => setkeywords(data))
   };
 
   useEffect(() => {
