@@ -1,6 +1,7 @@
 const {TokenizerEn, StopwordsEn, StemmerEn} = require("@nlpjs/lang-en");
 
 const CHARACTER_PATTERN = /[^a-zA-Z ]/g;
+const HTML_CODE_PATTERN = /<\/?[^>]+(>|$)/g
 
 /**
  * Preprocess input text, perform text cleaning
@@ -9,6 +10,7 @@ const CHARACTER_PATTERN = /[^a-zA-Z ]/g;
  */
 function preprocess(text) {
     text = text.replace(CHARACTER_PATTERN, "");
+    text = text.replace(HTML_CODE_PATTERN, "");
     text = text.toLowerCase();
     return text;
 }
