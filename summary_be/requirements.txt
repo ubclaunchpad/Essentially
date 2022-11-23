@@ -5,8 +5,12 @@ Flask-Cors==3.0.10
 importlib-metadata==5.0.0
 itsdangerous==2.1.2
 Jinja2==3.1.2
+joblib==1.2.0
 MarkupSafe==2.1.1
+nltk==3.7
 python-dotenv==0.21.0
+regex==2022.10.31
 six==1.16.0
+tqdm==4.64.1
 Werkzeug==2.2.2
 zipp==3.10.0
