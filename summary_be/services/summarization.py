@@ -1,16 +1,17 @@
 # Actual summarization logic
 
 import nltk
-import os
 import re
 import math
 import operator
+import collections
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import sent_tokenize,word_tokenize
 from nltk.corpus import stopwords
 
 INVALID = r'[^a-zA-Z0-9\s]'
 lemmatizer = WordNetLemmatizer()
+stop_words = set(stopwords.words('english'))
 
 """
     Function to clean and tokenize a chunk of text into words.
@@ -26,8 +27,6 @@ lemmatizer = WordNetLemmatizer()
     - array of valid words
 """
 def preprocess(text):
-    stop_words = set(stopwords.words('english'))
-
     # Remove evil >:) characters and digits
     text = re.sub(INVALID, '', text)
     text = re.sub(r'\d+', '', text)
@@ -90,7 +89,7 @@ def get_word_freq(words):
 
     Returns
     -------
-    score : int
+    score : float
     - tf-idf score of word
 """
 def tf_idf_score(word, sent, sentences):
@@ -115,12 +114,11 @@ def tf_idf_score(word, sent, sentences):
 """ 
 def tf_score(word, sentence):
     freq = 0
-    sentence = re.sub(INVALID, '', sentence)
-    words = word_tokenize(sentence)
-    length = len(words)
+    words = preprocess(sentence)
+    length = len(word_tokenize(re.sub(INVALID, '', sentence)))
     for word_ in words:
         word_ = lemmatizer.lemmatize(word_)
-        if (word == word_):
+        if word == word_:
             freq += 1
     return freq / length
 
@@ -188,32 +186,31 @@ def get_sentence_importance(sent, sentences):
 def summarize(text, num_sentences):
     sentences = sent_tokenize(text)
     sentence_importance = {}
-    idx = 1
 
-    for sentence in sentences:
+    for x in range(len(sentences)):
+        sentence = sentences[x]
         importance = get_sentence_importance(sentence, sentences)
-        sentence_importance[idx] = importance
-        idx += 1
+        sentence_importance[x] = importance
 
-    sentence_importance = sorted(sentence_importance.items(), key=operator.itemgetter(1),reverse=True)
+    sentence_importance = dict(sorted(sentence_importance.items(), key=lambda item: item[1]))
 
     curr_num_sentences = 0
-    summary = ""
+    summary = sentences[0]
     sentence_num = []
-    for word in sentence_importance:
-        if (curr_num_sentences < num_sentences):
-            sentence_num.append(word[0])
+    for key in sentence_importance:
+        if (curr_num_sentences < num_sentences - 1):
+            sentence_num.append(key)
             curr_num_sentences += 1
+            print(sentence_num)
         else:
             break
 
     sentence_num.sort()
-    cnt = 1
-    for sentence in sentences:
-        if cnt in sentence_num:
+    for x in range (len(sentences)):
+        if x in sentence_num:
+            print(sentences[x])
             summary += " "
-            summary += (sentence)
-        cnt = cnt+1
+            summary += sentences[x]
 
     return summary
 
