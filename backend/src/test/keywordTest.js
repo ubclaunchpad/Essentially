@@ -1,5 +1,5 @@
 const expect = require("chai").expect;
-const keyword = require("../main/keyword");
+const keyword = require("../main/process/keyword");
 
 describe("Keyword Extraction", function () {
     describe("Extract keyword from text", function () {
