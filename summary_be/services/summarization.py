@@ -3,15 +3,13 @@
 import nltk
 import re
 import math
-import operator
-import collections
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import sent_tokenize,word_tokenize
 from nltk.corpus import stopwords
 
-INVALID = r'[^a-zA-Z0-9\s]'
+INVALID = r'[^a-zA-Z\s]'
+STOP_WORDS = set(stopwords.words('english'))
 lemmatizer = WordNetLemmatizer()
-stop_words = set(stopwords.words('english'))
 
 """
     Function to clean and tokenize a chunk of text into words.
@@ -23,33 +21,24 @@ stop_words = set(stopwords.words('english'))
 
     Returns
     -------
-    text : []
+    lemmatized_words : []
     - array of valid words
 """
 def preprocess(text):
-    # Remove evil >:) characters and digits
+    # Remove invalid characters and digits
     text = re.sub(INVALID, '', text)
-    text = re.sub(r'\d+', '', text)
 
     # Remove stop words + convert to lower case
     words = word_tokenize(text)
-    stop_words_removed = []
-    for word in words:
-        word = word.lower()
-        if word not in stop_words:
-            stop_words_removed.append(word)
+    words = [word.lower() for word in words]
+    stop_words_removed = [word for word in words if word not in STOP_WORDS]
 
     # Remove one character words
-    valid_words = []
-    for word in stop_words_removed:
-        if len(word) > 1:
-            valid_words.append(word)
+    valid_words = [word for word in stop_words_removed if len(word) > 1]
 
-    # Lemmatize words, aka "builds" becomes "build" etc. 
-    lemmatized_words = []
-    for word in valid_words:
-       lemmatized_words.append(lemmatizer.lemmatize(word))
-    
+    # Lemmatize words, aka "builds" becomes "build" etc.
+    lemmatized_words = [lemmatizer.lemmatize(word) for word in valid_words]
+
     return lemmatized_words
 
 """
@@ -64,6 +53,8 @@ def preprocess(text):
     -------
     word_freq : {}
     - dictionary of word frequencies
+    - key is a string
+    - val is an int
 """
 def get_word_freq(words):
     dict = {}
@@ -76,51 +67,52 @@ def get_word_freq(words):
     return dict
 
 """
-    Function to return tf-idf score of a word.
+    Function to return sum of tf-idf score of words in a sentence.
 
     Parameters
     ----------
-    word : string
-    - word to compute score
     sent : string
     - sentence containing word
     sentences : []
-    - array of all sentences in text
+    - array of sentences in text
 
     Returns
     -------
     score : float
-    - tf-idf score of word
+    - tf-idf score of sentence
 """
-def tf_idf_score(word, sent, sentences):
-    tf = tf_score(word, sent)
-    idf = idf_score(word, sentences)
-    return tf * idf
+def tf_idf_score(sent, sentences):
+    sent = re.sub(INVALID, '', sent)
+    sent_len = len(word_tokenize(sent))
+    words_in_given_sent = preprocess(sent)
+    word_freq = get_word_freq(words_in_given_sent)
+
+    score = 0
+    for word in words_in_given_sent:
+        tf = tf_score(word_freq[word], sent_len)
+        idf = idf_score(word, sentences)
+        tf_idf = tf * idf
+        score += tf_idf
+        
+    return score
 
 """
     Function to return term frequency score of a word.
 
     Parameters
     ----------
-    word : string
-    - word to compute score
-    sentence : string
-    - sentence containing word
+    freq : int
+    - frequency of word in given sentence
+    sent_len : int
+    - total number of words in sentence
 
     Returns
     -------
-    score : float
+    tf_score : float
     - tf score of word
 """ 
-def tf_score(word, sentence):
-    freq = 0
-    words = preprocess(sentence)
-    length = len(word_tokenize(re.sub(INVALID, '', sentence)))
-    for word_ in words:
-        word_ = lemmatizer.lemmatize(word_)
-        if word == word_:
-            freq += 1
-    return freq / length
+def tf_score(freq, sent_len):
+    return freq / sent_len
 
 """
     Function to return inverse document frequency of a word.
@@ -141,31 +133,65 @@ def idf_score(word, sentences):
     num_sent_containing_word = 0
     for sent in sentences:
         words = preprocess(sent)
-        word = lemmatizer.lemmatize(word)
-        if (word in words):
+        if word in words:
             num_sent_containing_word += 1
     return math.log10(len(sentences) / num_sent_containing_word)
 
 """
-    Function to get sentence importance in a given text.
+    Function to return sentence weights based on tf-idf score
 
     Parameters
     ----------
-    text : string
-    - text to summarize
-    num_sentences : int
-    - number of sentences to include in summary
+    sentences : []
+    - array of sentences in text
 
     Returns
     -------
-    sentence_importance : float
-    - extractive summary of text
+    sentence_weight : {}
+    - dictionary of sentence weights
+    - key is index of sentence in sentences
+    - val is tf-idf score
 """
-def get_sentence_importance(sent, sentences):
-    score = 0
-    for word in preprocess(sent):
-        score += tf_idf_score(word, sent, sentences)
-    return score
+
+def get_sentence_weights(sentences):
+    sentence_weight = {}
+    for x in range(len(sentences)):
+        sentence = sentences[x]
+        importance = tf_idf_score(sentence, sentences)
+        sentence_weight[x] = importance
+    sentence_weight = dict(sorted(sentence_weight.items(), key=lambda item: item[1], reverse=True))
+    return sentence_weight
+
+"""
+    Function to return indices of top scoring sentences
+
+    Parameters
+    ----------
+    sentence_weight: {}
+    - dictionary of sentence weights
+    num_sent: int
+    - number of top scoring sentences to return
+
+    Returns
+    -------
+    sentence_idx : []
+    - indices of top scoring sentences
+"""
+
+def get_top_scoring_sent(sentence_weight, num_sent):
+    curr_num_sentences = 0
+    sentence_idx = []
+    for key in sentence_weight:
+        if (key == 0):
+            continue
+        if (curr_num_sentences < num_sent - 1):
+            sentence_idx.append(key)
+            curr_num_sentences += 1
+        else:
+            break
+    sentence_idx.sort()
+    return sentence_idx
+
 
 """
     Function to summarize a given text.
@@ -184,38 +210,16 @@ def get_sentence_importance(sent, sentences):
 """
 
 def summarize(text, num_sentences):
+    if num_sentences <= 1:
+        raise Exception("Summary must have at least one sentence.")
     sentences = sent_tokenize(text)
-    sentence_importance = {}
+    sentence_weight = get_sentence_weights(sentences)
+    sentence_idx = get_top_scoring_sent(sentence_weight, num_sentences)
 
-    for x in range(len(sentences)):
-        sentence = sentences[x]
-        importance = get_sentence_importance(sentence, sentences)
-        sentence_importance[x] = importance
-
-    sentence_importance = dict(sorted(sentence_importance.items(), key=lambda item: item[1]))
-
-    curr_num_sentences = 0
     summary = sentences[0]
-    sentence_num = []
-    for key in sentence_importance:
-        if (curr_num_sentences < num_sentences - 1):
-            sentence_num.append(key)
-            curr_num_sentences += 1
-            print(sentence_num)
-        else:
-            break
-
-    sentence_num.sort()
     for x in range (len(sentences)):
-        if x in sentence_num:
-            print(sentences[x])
+        if x in sentence_idx:
             summary += " "
             summary += sentences[x]
 
     return summary
-
-#TODO
-def getConfidenceLevel():
-    print(True)
-
-print(summarize("Elon Musk sold $3.95 billion worth of Tesla stock since completing his purchase of Twitter late last month. Musk’s Tesla stock sales, totaling 19.5 million shares, have been widely anticipated ever since the Tesla CEO reached a deal to buy Twitter for $44 billion. Musk had sold blocks of Tesla shares worth a total of $15.4 billion earlier this year since his deal to buy Twitter was announced. Twitter confirmed Musk bought the social media company October 27, but he waited until November 4 to start selling additional Tesla shares. He also sold blocks of Tesla stock on Monday and Tuesday this week, according to filings to the Securities and Exchange Commission late Tuesday night. It’s not clear if the money Musk raised went toward the Twitter purchase, or to support losses at Twitter since he took over. Musk disclosed last week that Twitter has seen a “massive drop in revenue,” as a growing number of advertisers pause spending on the platform in the wake of his takeover of the company. He blamed “activist groups” pressuring advertisers for the loss of ad dollars. He has announced plans to charge users $8 a month to have verified accounts, and also announced deep staff cuts. This is not the best time to be selling Tesla shares, which have lost 46% of their value so far this year on disappointing sales caused by supply chain problems. Musk received an average price of $202.52 for the Tesla shares he sold since the Twitter deal closed, which is down 10% just since he closed on his deal to buy Twitter. Shares of Tesla fell 0.7% in after-hours trading Tuesday. The company is facing growing competition in the electric vehicle market from established automakers such as Volkswagen, Ford and General Motors. And some investors have expressed concerns that Musk will be too distracted by his purchase of Twitter to give enough attention to addressing Tesla’s problems.", 3))
