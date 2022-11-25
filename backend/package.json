@@ -8,7 +8,7 @@
         "jsdom": "^20.0.2"
     },
     "scripts": {
-        "start": " tsc && node dist/app.js",
+        "start": "tsc && node dist/app.js",
         "test": "nyc mocha --require ts-node/register 'test/**/*.spec.ts'"
     },
     "devDependencies": {
