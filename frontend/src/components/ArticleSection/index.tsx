@@ -37,9 +37,15 @@ export default function Article(props: ArticleProps) {
   };
 
   const generateKeywords = () => {
-    const temp = props.body[0].split(' ');
-    setkeywords(['Examples:'].concat(temp.slice(0, 3)));
-    //TODO: connect with BE
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: props.body.join(), numOfKeywords: 3})
+    };
+
+    fetch("http://localhost:3000/keyword", requestOptions)
+        .then(res => res.json())
+        .then(data => setkeywords(data))
   };
 
   useEffect(() => {
