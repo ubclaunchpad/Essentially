@@ -24,7 +24,7 @@ This folder contains the Backend for Summarization-related services. Written in 
 ## Running the Server
 
 1. Activate the virtual environment:
-   - Windows: `venv\Scripts\activate.bat`
+   - Windows: `venv\Scripts\activate`
    - MacOS or Linux: `source venv/bin/activate`
 2. Start the Flask app by running `Python app.py`
 
