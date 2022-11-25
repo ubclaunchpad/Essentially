@@ -210,7 +210,7 @@ def get_top_scoring_sent(sentence_weight, num_sent):
 """
 
 def summarize(text, num_sentences):
-    if num_sentences <= 1:
+    if num_sentences < 1:
         raise Exception("Summary must have at least one sentence.")
     sentences = sent_tokenize(text)
     sentence_weight = get_sentence_weights(sentences)
