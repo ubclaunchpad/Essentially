@@ -126,7 +126,7 @@ h2 {
 .article ::-moz-selection {
     /* Code for Firefox */
     color: var(--extension-primary);
-    background: var(--secondary);
+    background: var(--extension-secondary);
 }
 
 .article ::selection {
@@ -254,7 +254,7 @@ nav button {
     border: none;
     outline: none;
     border-radius: 10px;
-    color: var(--primary);
+    color: var(--extension-primary);
 }
 
 .sidebar {
