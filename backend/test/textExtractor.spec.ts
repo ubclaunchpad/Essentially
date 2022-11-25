@@ -9,11 +9,9 @@ describe("Summary Endpoint Testing", () => {
       const response = await request(app)
         .post("/summary")
         .send({
-          body: {
             content:
               "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
             length: 20,
-          },
         });
 
       expect(response.statusCode).to.equal(200);
@@ -26,9 +24,7 @@ describe("Summary Endpoint Testing", () => {
       return request(app)
         .post("/summary")
         .send({
-          body: {
             length: 20,
-          },
         })
         .then((res) => {
           expect(res.statusCode).to.equal(400);
@@ -41,9 +37,7 @@ describe("Summary Endpoint Testing", () => {
       return request(app)
         .post("/summary")
         .send({
-          body: {
             length: 20,
-          },
         })
         .then((res) => {
           expect(res.statusCode).to.equal(504);
