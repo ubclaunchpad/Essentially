@@ -5,7 +5,9 @@ import Article from './components/ArticleSection/index';
 
 function App() {
   const ESSENTIALLY = 'Essentially';
-  const [text, setText] = useState<string[]>([]);
+  const [text, setText] = useState<any>({
+    body: [],
+  });
   const [showSettings, setShowSettings] = useState(false);
 
   const callExtension = () => {
@@ -57,8 +59,8 @@ function App() {
     return <></>;
   };
 
-  if (text.length > 0) {
-    return <Article body={text} close={close} />;
+  if (text.body.length > 0) {
+    return <Article title={text.title} date={text.date} website={text.company} body={text.body} close={close} />;
   }
 
   return (
