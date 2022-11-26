@@ -2,13 +2,19 @@
 import './App.css';
 import { useState } from 'react';
 import ArticleSection from './components/ArticleSection/Summary';
-import Article from './components/ArticleSection/index';
+import Article, { IArticleData } from './components/ArticleSection/index';
 
 function App() {
   const ESSENTIALLY = 'Essentially';
-  const [text, setText] = useState<any>({
-    body: [],
-  });
+  const EMPTY_TEXT = {
+    title: "",
+    date: "",
+    author: "",
+    website: "",
+    body: []
+  }
+
+  const [text, setText] = useState<IArticleData>(EMPTY_TEXT);
   const [showSettings, setShowSettings] = useState(false);
 
   const callExtension = () => {
@@ -32,15 +38,21 @@ function App() {
       });
     } catch (exception) {
       console.log('COULD NOT CONNECT TO CHROME');
-      setText([
-        'Setting zero for offset and blur When the x-offset, y-offset, and blur are all zero, the box shadow will be a solid-colored outline of equal-size on all sides. The shadows are drawn back to front, so the first shadow sits on top of subsequent shadows. When the border-radius is set to 0, as is the default, the corners of the shadow will be, well, corners.',
-        " Had we put    i i   \t     in a border-radius of any other value, the corners would have been rounded.We added a margin the size of the widest box-shadow to ensure the shadow doesn't overlap adjacent elements or go beyond the border of the containing box. A box-shadow does not impact box model dimensions.Setting zero for offset and blur When the x-offset, y-offset, and blur are all zero, the box shadow will be a solid-colored outline of equal-size on all sides. The shadows are drawn back to front, so the first shadow sits on top of subsequent shadows.",
-      ]);
+      setText({
+            title: "DEFAULT TITLE",
+            date: "DEFAULT DATE",
+            author: "DEFAULT AUTHOR",
+            website: "DEFAULT WEBSITE",
+            body: [
+          'Setting zero for offset and blur When the x-offset, y-offset, and blur are all zero, the box shadow will be a solid-colored outline of equal-size on all sides. The shadows are drawn back to front, so the first shadow sits on top of subsequent shadows. When the border-radius is set to 0, as is the default, the corners of the shadow will be, well, corners.',
+          " Had we put    i i   \t     in a border-radius of any other value, the corners would have been rounded.We added a margin the size of the widest box-shadow to ensure the shadow doesn't overlap adjacent elements or go beyond the border of the containing box. A box-shadow does not impact box model dimensions.Setting zero for offset and blur When the x-offset, y-offset, and blur are all zero, the box shadow will be a solid-colored outline of equal-size on all sides. The shadows are drawn back to front, so the first shadow sits on top of subsequent shadows.",
+        ]
+      });
     }
   };
 
   const close = () => {
-    setText([]);
+    setText(EMPTY_TEXT);
   };
 
   const settingsMenu = () => {
@@ -61,7 +73,14 @@ function App() {
   };
 
   if (text.body.length > 0) {
-    return <Article title={text.title} date={text.date} website={text.company} body={text.body} close={close} />;
+    return <Article
+        title={text.title}
+        date={text.date}
+        author={text.author}
+        website={text.website}
+        body={text.body}
+        close={close}
+    />;
   }
 
   return (

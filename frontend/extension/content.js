@@ -18,12 +18,12 @@ function getPageText() {
         title = titleHTML.getAttribute("content");
     }
 
-    let company = "";
+    let website = "";
 
-    const companyHTML = document.querySelector('meta[property*="site_name"], meta[name="application-name"]');
+    const websiteHTML = document.querySelector('meta[property*="site_name"], meta[name="application-name"]');
 
-    if (companyHTML) {
-        company = companyHTML.getAttribute("content");
+    if (websiteHTML) {
+        website = websiteHTML.getAttribute("content");
     }
 
     let description = "";
@@ -59,10 +59,10 @@ function getPageText() {
 
     return {
         title: title,
-        description: description,
-        company: company,
-        body: body,
-        date: date
+        date: date,
+        author: "",
+        website: website,
+        body: body
     };
 }
 

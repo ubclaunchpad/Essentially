@@ -3,7 +3,7 @@ import ArticleSection from './Summary';
 import Lens from '../Lens';
 import Sidebar from '../Sidebar';
 
-interface IArticleData {
+export interface IArticleData {
   title?: string;
   date?: string;
   author?: string;
