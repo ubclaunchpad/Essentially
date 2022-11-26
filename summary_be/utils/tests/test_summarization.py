@@ -1,6 +1,6 @@
 import unittest
 
-from summarization import*
+from utils.summarization import *
 
 TEXT = "Chocolate chip cookies. Graham biscuit chocolate cheesecake."
 sentences = sent_tokenize(TEXT)
