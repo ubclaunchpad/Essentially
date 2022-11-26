@@ -15,15 +15,25 @@ routes.post("/summary", (req: express.Request, res: express.Response) => {
   });
 
   try {
-    // TODO Call Python API
-  } catch (e: any) {}
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        "content": {
+          "text": req.body.content
+        },
+        "length": req.body.length
+      })
+    };
 
-  res.send({
-    summarized_text: "Placeholder",
-    meta: {
-      length: 11,
-    },
-  });
+    fetch("http://127.0.0.1:8000/articles/summary", requestOptions).then(res => res.json())
+        .then(data => {
+          res.send({
+            summarized_text: data.summarized_text,
+            meta: data.Meta
+          })
+        });
+  } catch (e: any) {}
 });
 
 routes.post("/keyword", (req: express.Request, res: express.Response) => {

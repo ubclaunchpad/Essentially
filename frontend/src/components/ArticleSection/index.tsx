@@ -17,7 +17,8 @@ interface ArticleProps extends IArticleData {
 
 export default function Article(props: ArticleProps) {
   const [readTime, setReadTime] = useState('');
-  const [keywords, setkeywords] = useState<string[]>([]);
+  const [keywords, setKeywords] = useState<string[]>([]);
+  const [summary, setSummary] = useState<string[]>([]);
 
   const pageTitle = props.title || props.website || 'No Title Found';
 
@@ -45,12 +46,28 @@ export default function Article(props: ArticleProps) {
 
     fetch("http://localhost:3000/keyword", requestOptions)
         .then(res => res.json())
-        .then(data => setkeywords(data))
+        .then(data => setKeywords(data))
+  };
+
+  const generateSummary = () => {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ content: props.body.join(), length: 3})
+    };
+
+    fetch("http://localhost:3000/summary", requestOptions)
+        .then(res => res.json())
+        .then(data => {
+          console.log(data);
+          setSummary(data.summarized_text);
+        })
   };
 
   useEffect(() => {
     generateReadTime();
     generateKeywords();
+    generateSummary();
   }, []);
 
   return (
@@ -94,7 +111,7 @@ export default function Article(props: ArticleProps) {
             ))}
           </div>
           <Lens>
-            <ArticleSection text={props.body} />
+            <ArticleSection text={summary} />
           </Lens>
         </div>
       </div>
