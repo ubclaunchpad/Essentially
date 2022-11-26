@@ -29,11 +29,21 @@ This folder contains the Backend for Summarization-related services. Written in 
 1. Activate the virtual environment:
    - Windows: `venv\Scripts\activate`
    - MacOS or Linux: `source venv/bin/activate`
-2. Start the Flask app by running `Python app.py`
+2. Start the Flask app by running `python app.py`
 
 Note: If you need to install new Python packages, make sure you run `pip freeze > requirements.txt` so that other developers will know to download the package as well.
 
 Run `deactivate` to deactivate the virtual environment.
+
+## Tests
+
+To run all tests make sure you're in the summary_be directory and run `python -m unittest`
+
+To create new tests, there are a few conventions that must be followed (in order for Python to detect it):
+
+1. Inside each subfolder within tests, there must be an empty `__init__.py`
+2. Each test class must have unittest.TestCase included
+3. The tests under the test class must start with `test_*.py`
 
 ## API Endpoints
 
