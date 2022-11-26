@@ -33,8 +33,7 @@ class SummarizationServicesTesting(unittest.TestCase):
     def test_success_response(self):
         with app.app_context():
             response = get_summary_service(TEXT)
-            print(response.data.summarized_text)
-            self.assertEqual(1, 1)
+            print(response.json)
     # Empty Text
     # Wrong Input Type
     # A different language

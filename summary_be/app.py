@@ -19,4 +19,4 @@ if 'PORT' in os.environ:
 app.register_blueprint(summarization_route)
 
 if __name__ == '__main__':
-    app.run(port=PORT, debug=True)
+    app.run(host='0.0.0.0', port=PORT, debug=True)
