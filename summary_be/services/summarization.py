@@ -18,7 +18,7 @@ def get_summary_service(text, num_sentences=3):
         return make_response({
             "summarized_text": result,
             "Meta": {
-                "length": str(num_words)
+                "length": num_words
             }
         }, 200)
     except Exception as error:
