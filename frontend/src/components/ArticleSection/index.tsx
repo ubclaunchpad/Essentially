@@ -5,7 +5,7 @@ import Sidebar from '../Sidebar';
 
 interface IArticleData {
   title?: string;
-  date?: Date;
+  date?: string;
   author?: string;
   website?: string;
   body: string[];

@@ -10,20 +10,60 @@ function addstylesheet(filename) {
 addstylesheet('styles.css');
 
 function getPageText() {
-    let res = [];
+
+    let title = "";
+
+    const titleHTML = document.querySelector('meta[name="title"], meta[itemprop="title"], meta[name="name"], meta[itemprop="name"], meta[name="headline"]');
+    if (titleHTML) {
+        title = titleHTML.getAttribute("content");
+    }
+
+    let company = "";
+
+    const companyHTML = document.querySelector('meta[property*="site_name"], meta[name="application-name"]');
+
+    if (companyHTML) {
+        company = companyHTML.getAttribute("content");
+    }
+
+    let description = "";
+
+    const descriptionHTML = document.querySelector('meta[name="description"], meta[itemProp="description"]');
+
+    if (descriptionHTML) {
+        description = descriptionHTML.getAttribute("content");
+    }
+
+    let date = "";
+
+    const dateHTML = document.querySelector('meta[itemProp="datePublished"]');
+    if (dateHTML) {
+        date = dateHTML.getAttribute("content");
+    }
+
     const allText = Array.from(document.body.getElementsByTagName('p')).map(
         (e) => e.innerHTML
     );
+
+    let body = [];
 
     for (const text of allText) {
         const span_regex = /<span.*>/g;
         const a_tag_regex = /<\/?a([^>])*>/g;
 
         if (text.charAt(0) !== '<' && !span_regex.exec(text)) {
-            res.push(text.replaceAll(a_tag_regex, ''));
+            body.push(text.replaceAll(a_tag_regex, ''));
         }
     }
-    return res;
+
+
+    return {
+        title: title,
+        description: description,
+        company: company,
+        body: body,
+        date: date
+    };
 }
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
