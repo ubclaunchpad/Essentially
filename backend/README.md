@@ -20,7 +20,7 @@ This folder contains code to run the server for TL;DR
 
 1. make sure you are in the `backend` directory
 
-2. Run `nodemon get_article_text.ts` to run the server
+2. Run `npm run start` to run the server
 
 3. the server will run on `http://localhost:3000/`
 
