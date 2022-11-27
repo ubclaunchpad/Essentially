@@ -1,11 +1,11 @@
 import unittest
 
-from summarization import*
+from utils.summarization import *
 
 TEXT = "Chocolate chip cookies. Graham biscuit chocolate cheesecake."
 sentences = sent_tokenize(TEXT)
 
-class Testing(unittest.TestCase):
+class SummarizationUtilsTesting(unittest.TestCase):
     def test_preprocess(self):
         text = "The cats ate Oreos from the b cabinet."
         valid = ["cat", "ate", "oreo", "cabinet"]
@@ -29,6 +29,3 @@ class Testing(unittest.TestCase):
     def test_get_top_scoring_sent(self):
         sentence_weight = {0:tf_idf_score(sentences[0], sentences), 1:tf_idf_score(sentences[1], sentences)}
         self.assertEqual([1], get_top_scoring_sent(sentence_weight, 2))
-
-if __name__ == '__main__':
-    unittest.main()

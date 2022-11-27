@@ -1,41 +1,60 @@
 import express from "express";
-import { Router } from 'express';
-import {getKeywordsFromText} from "./keyword";
+import { Router } from "express";
+import { getKeywordsFromText } from "./keyword";
+import { ISummarizationData } from "../interface";
 
 const routes = Router();
 
-
 routes.post("/summary", (req: express.Request, res: express.Response) => {
-    if (!req.body || !req.body.content || !req.body.length) {
-        res.status(400).send("Invalid Request - Please supply some text and length to summarize.");
-    }
+  if (!req.body || !req.body.content || !req.body.length) {
+    res
+      .status(400)
+      .send(
+        "Invalid Request - Please supply some text and length to summarize."
+      );
+  }
 
-    res.setTimeout(60000, () => {
-        res.status(504).send("Server Timed Out.");
-    });
+  res.setTimeout(60000, () => {
+    res.status(504).send("Server Timed Out.");
+  });
 
-    try {
-        // TODO Call Python API
-    } catch (e: any) {}
-
-    res.send({
-        summarized_text: "Placeholder",
-        meta: {
-            length: 11,
+  try {
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        content: {
+          text: req.body.content,
         },
-    });
+        length: req.body.length,
+      }),
+    };
+
+    fetch("http://127.0.0.1:8000/articles/summary", requestOptions)
+      .then((res) => res.json())
+      .then((data: ISummarizationData) => {
+        res.send({
+          summarized_text: data.summarized_text,
+          meta: data.Meta,
+        });
+      });
+  } catch (e: any) {
+    console.log(e);
+  }
 });
 
 routes.post("/keyword", (req: express.Request, res: express.Response) => {
-    if (!req.body || !req.body.text) {
-        res.status(400).send("Invalid Request - Please supply some text extract keywords from.");
-    }
+  if (!req.body || !req.body.text) {
+    res
+      .status(400)
+      .send("Invalid Request - Please supply some text extract keywords from.");
+  }
 
-    res.setTimeout(60000, () => {
-        res.status(504).send("Server Timed Out.");
-    });
+  res.setTimeout(60000, () => {
+    res.status(504).send("Server Timed Out.");
+  });
 
-    res.send(getKeywordsFromText(req.body.text, req.body.numOfKeywords));
+  res.send(getKeywordsFromText(req.body.text, req.body.numOfKeywords));
 });
 
 export default routes;

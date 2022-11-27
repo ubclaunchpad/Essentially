@@ -10,6 +10,8 @@ This folder contains the Backend for Summarization-related services. Written in 
 
 `utils` is for common functions that are used within services; it's fore utility functions.
 
+`tests` is used for testing. There are subfolders within `tests` to test the functions by their respective categories.
+
 ## Installation
 
 1. Clone the respository
@@ -19,18 +21,29 @@ This folder contains the Backend for Summarization-related services. Written in 
 3. Move to summary_be `cd summary_be`
 4. Create a virtual environment `python -m venv venv`
 5. Install dependencies `pip install -r requirements.txt`
-6. Create a `.env` file and add `PORT=8000` (8000 is just a value; you can set whichever you want)
+6. Must download the following using the command line by running the command `python -m nltk.downloader stopwords punkt wordnet omw-1.4`
+7. Create a `.env` file and add `PORT=8000` (8000 is just a value; you can set whichever you want)
 
 ## Running the Server
 
 1. Activate the virtual environment:
    - Windows: `venv\Scripts\activate`
    - MacOS or Linux: `source venv/bin/activate`
-2. Start the Flask app by running `Python app.py`
+2. Start the Flask app by running `python app.py`
 
 Note: If you need to install new Python packages, make sure you run `pip freeze > requirements.txt` so that other developers will know to download the package as well.
 
 Run `deactivate` to deactivate the virtual environment.
+
+## Tests
+
+To run all tests make sure you're in the summary_be directory and run `python -m unittest`
+
+To create new tests, there are a few conventions that must be followed (in order for Python to detect it):
+
+1. Inside each subfolder within tests, there must be an empty `__init__.py`
+2. Each test class must have unittest.TestCase included
+3. The tests under the test class must start with `test_*.py`
 
 ## API Endpoints
 
