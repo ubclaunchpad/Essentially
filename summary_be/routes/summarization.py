@@ -1,6 +1,6 @@
 import json
 
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request
 from services.summarization import *
 
 summarization_route = Blueprint('summarization_route', __name__)
