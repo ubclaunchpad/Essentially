@@ -1,6 +1,7 @@
 import express from "express";
 import { Router } from "express";
 import { getKeywordsFromText } from "./keyword";
+import { ISummarizationData } from "../interface";
 
 const routes = Router();
 
@@ -31,13 +32,15 @@ routes.post("/summary", (req: express.Request, res: express.Response) => {
 
     fetch("http://127.0.0.1:8000/articles/summary", requestOptions)
       .then((res) => res.json())
-      .then((data) => {
+      .then((data: ISummarizationData) => {
         res.send({
           summarized_text: data.summarized_text,
           meta: data.Meta,
         });
       });
-  } catch (e: any) {}
+  } catch (e: any) {
+    console.log(e);
+  }
 });
 
 routes.post("/keyword", (req: express.Request, res: express.Response) => {
