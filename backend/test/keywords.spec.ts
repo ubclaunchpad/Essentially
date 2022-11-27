@@ -12,7 +12,7 @@ describe("Keyword Extraction", function () {
 
     it("find expected number of keyword", function () {
       const testString =
-        "I am trying to test my firebase security rules, using Typescript and Mocha, but I can't even run my test";
+          "I am trying to test my firebase security rules, using Typescript and Mocha, but I can't even run my test";
       expect(getKeywordsFromText(testString, 3).length).to.equal(3);
     });
 

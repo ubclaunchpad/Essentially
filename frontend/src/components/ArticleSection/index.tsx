@@ -3,9 +3,9 @@ import ArticleSection from './Summary';
 import Lens from '../Lens';
 import Sidebar from '../Sidebar';
 
-interface IArticleData {
+export interface IArticleData {
   title?: string;
-  date?: Date;
+  date?: string;
   author?: string;
   website?: string;
   body: string[];
@@ -87,6 +87,7 @@ export default function Article(props: ArticleProps) {
           <h6>{readTime}</h6>
           <div>
             <h1>{pageTitle}</h1>
+            <h4>{props.date}</h4>
           </div>
           <div className="keywords">
             {keywords.map((keyword) => (

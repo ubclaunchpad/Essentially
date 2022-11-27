@@ -8,8 +8,8 @@
         "jsdom": "^20.0.2"
     },
     "scripts": {
-        "start": "tsc && node dist/app.js",
-        "test": "nyc mocha --require ts-node/register 'test/**/*.spec.ts'"
+        "start": " tsc && node dist/app.js",
+        "test": "nyc mocha --require ts-node/register -R spec --ui bdd 'test/**/*.spec.ts' "
     },
     "devDependencies": {
         "@types/chai": "^4.3.4",
