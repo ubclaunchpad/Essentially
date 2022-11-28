@@ -1,0 +1,9 @@
+.sidebar {
+    width: 50px;
+    background-color: var(--extension-secondary);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0px;
+}

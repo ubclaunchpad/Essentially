@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import './App.css';
+import './App.scss';
 
 interface IArticleData {
     title: string,

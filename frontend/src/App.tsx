@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import { useState } from 'react';
 import ArticleSection from './components/ArticleSection/Summary';
 import Article from './components/ArticleSection/index';
