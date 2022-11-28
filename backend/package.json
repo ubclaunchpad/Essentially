@@ -11,7 +11,7 @@
     "jsdom": "^20.0.2"
   },
   "scripts": {
-    "start": " tsc && node dist/src/app.js",
+    "start": "tsc && node dist/src/app.js",
     "test": "nyc mocha --require ts-node/register -R spec --ui bdd 'test/**/*.spec.ts' "
   },
   "devDependencies": {
