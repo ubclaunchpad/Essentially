@@ -13,18 +13,18 @@
 
 ## About Essentially
 
-A tool to spend your time reading what's actually important. Essentially is a Chrome extension that analyzes and ssummarizes articles on the web. Additionally, you can use `Lens` to delve deeper into what you want to know more
+A tool to spend your time reading what's actually important. Essentially is a Chrome extension that analyzes and summarizes articles on the web. Additionally, you can use `Lens` to delve deeper into what you want to know more
 
 ## Getting Started
 
-We plan to publissh Eentially on the Chrome Webtroe by March 2023; but, fret not, you can download and setup esentially on your laptop or desktop and use it.
-there are 3 main steps to get Essentially up an running and should take no more than a few minutes
+We plan to publish Esentially on the Chrome Webstore by **April 2023**; but, fret not, you can download and setup Esentially on your laptop or desktop and use it.
+there are 3 main steps to get Essentially up and running and should take no more than a few minutes
 
 #### Setup
 
 - you need to first setup the extension locally on Chrome
   - Refer to the readme located in the `frontend` folder on how to setup and run the extension
-- To connect the extension to servers you should run the extension API and ML servers simultaneously
+- To connect the extension to the server you should run the extension API and ML servers simultaneously
   - Refer to the readme located in the `backend` folder on how to run the server
   - Refer to the readme located in the `summary_be` folder on how to run the server
 
@@ -41,7 +41,8 @@ there are 3 main steps to get Essentially up an running and should take no more 
 
 ## Roadmap
 
-we anticipate to major phases before Essentially is _essentially_ done (pardon the pun)
+we anticipate to have 3 major phases before Essentially is _essentially_ done (pardon the pun).
+so far Phase 1 is completed and Phase 2 has started.
 
 #### Phase 1:
 
@@ -62,7 +63,7 @@ TBD
 
 ## Contributing
 
-Everyone is welcome to contribute to the project. You can contribute two ways:
+Everyone is welcome to contribute to the project. You can contribute via two ways:
 
-- you can give us feedback by using `Essentially` and if submit feature requests orr bugs in the `Issues` section of thise repository
+- you can give us feedback by using `Essentially` and submit feature requests or bug reports in the `Issues` section of this repository
 - Alternatively, if you see an open issue you'd like to work on, comment on the issue to be assigned and fork the repository. Once you've resolved the issue, make a PR and one of the team members can review
