@@ -65,7 +65,7 @@ TBD
 
 Everyone is welcome to contribute to the project. You can contribute via two ways:
 
-- you can give us feedback by using `Essentially` and submit feature requests or bug reports in the `Issues` section of this repository
-- Alternatively, if you see an open issue you'd like to work on (we suggest ones with `good first issue` label if it's your first time contributing), comment on the issue to be assigned and fork the repository. Once you've resolved the issue, make a PR and one of the team members can review.
+- you can give us feedback by using `Essentially` and submit feature requests or bug reports in the [Issues](https://github.com/ubclaunchpad/Essentially/issues) section of this repository
+- Alternatively, if you see an open issue you'd like to work on (we suggest ones with [good first issue](https://github.com/ubclaunchpad/Essentially/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) label if it's your first time contributing), comment on the issue to be assigned and fork the repository. Once you've resolved the issue, make a PR and one of the team members can review.
 
-_side note: Any Launchpad member that wants to be a bit more hands-on on this project, and be involved in the decision-making as well, please message one of the team memebers._
+_side note: Any Launchpad member that wants to be a bit more hands-on on this project, and be involved in the decision-making as well, please message one of the team members._
