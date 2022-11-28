@@ -1,0 +1,67 @@
+:root {
+    --extension-tertiary: #191b43;
+    --extension-secondary: #191b43;
+    --extension-primary: #e9e9e9;
+}
+
+.loader {
+    background: none;
+}
+
+.progressbar {
+    width: 250;
+    max-width: inherit;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: flex-start;
+    color: #191b43;
+    background-position: right;
+    animation: makeItfadeIn 4s ease-in 0s forwards;
+    background: linear-gradient( to right, var(--extension-secondary) 50%, var(--extension-primary) 50%);
+    border: 1px solid var(--extension-primary);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    padding: 10px 20px;
+    margin-top: 5px;
+    border-radius: 10px;
+}
+
+.progressbar.mainbar {
+    width: 250;
+    animation: none;
+}
+
+.progressbar h6 {
+    font-size: 16px;
+}
+
+.progressbar h1 {
+    font-size: 18px;
+    color: var(--extension-secondary);
+}
+
+.progressbar p {
+    margin-top: 10px;
+    font-size: 9px;
+    width: 250px;
+}
+
+.progressbars {
+    border: 0.7px dashed var(--extension-secondary);
+    padding: 10px;
+    box-shadow: 0px 2px 7px 1px rgba(0, 0, 0, 0.15);
+    animation: makeItfadeIn 1s ease-in 40s forwards;
+    background: linear-gradient( to right, var(--extension-secondary) 50%, var(--extension-primary) 50%);
+    border: 1px solid var(--extension-primary);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    border-radius: 10px;
+}
+
+@keyframes makeItfadeIn {
+    100% {
+        background-position: left bottom;
+        color: #ffffff;
+    }
+}

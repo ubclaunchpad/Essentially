@@ -1,6 +1,6 @@
 {
-    "name": "TLDR",
-    "version": "0.1",
+    "name": "Essentially",
+    "version": "0.9",
     "manifest_version": 3,
     "permissions": ["activeTab", "scripting", "notifications"],
     "background": {
@@ -8,6 +8,12 @@
     },
     "action": {
         "default_title": "Click to show an alert"
+    },
+    "icons": {
+        "16": "icon.png",
+        "32": "icon.png",
+        "48": "icon.png",
+        "128": "icon.png"
     },
     "web_accessible_resources": [{
             "resources": ["styles.css"],
