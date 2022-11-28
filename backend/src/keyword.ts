@@ -1,6 +1,8 @@
-const {TokenizerEn, StopwordsEn, StemmerEn} = require("@nlpjs/lang-en");
+// @ts-nocheck
+import { TokenizerEn, StopwordsEn, StemmerEn } from "@nlpjs/lang-en";
 
 const CHARACTER_PATTERN = /[^a-zA-Z ]/g;
+const HTML_CODE_PATTERN = /<\/?[^>]+(>|$)/g
 
 /**
  * Preprocess input text, perform text cleaning
@@ -8,9 +10,10 @@ const CHARACTER_PATTERN = /[^a-zA-Z ]/g;
  * @returns {string} preprocessed text
  */
 function preprocess(text) {
-    text = text.replace(CHARACTER_PATTERN, "");
-    text = text.toLowerCase();
-    return text;
+  text = text.replace(CHARACTER_PATTERN, "");
+  text = text.replace(HTML_CODE_PATTERN, "");
+  text = text.toLowerCase();
+  return text;
 }
 
 /**
@@ -22,24 +25,22 @@ function preprocess(text) {
  * stemToWorldList: a map that map lemma to a list of words that could be stemmed to the lemma key
  */
 function getTokenizeAndStem(text) {
-    let stemAndTokenize = {};
+  let stemAndTokenize = {};
 
-    const tokenizer = new TokenizerEn();
-    const stopwords = new StopwordsEn();
-    stemAndTokenize.wordList = stopwords.removeStopwords(
-        tokenizer.tokenize(text)
-    );
-    const stemmer = new StemmerEn();
-    stemAndTokenize.stemList = stemmer.stem(stemAndTokenize.wordList);
+  const tokenizer = new TokenizerEn();
+  const stopwords = new StopwordsEn();
+  stemAndTokenize.wordList = stopwords.removeStopwords(tokenizer.tokenize(text));
+  const stemmer = new StemmerEn();
+  stemAndTokenize.stemList = stemmer.stem(stemAndTokenize.wordList);
 
-    let stemToWordList = buildStemToWordList(
-        stemmer,
-        stemAndTokenize.wordList,
-        stemAndTokenize.stemList
-    );
-    stemAndTokenize.stemToWordList = stemToWordList;
+  let stemToWordList = buildStemToWordList(
+    stemmer,
+    stemAndTokenize.wordList,
+    stemAndTokenize.stemList
+  );
+  stemAndTokenize.stemToWordList = stemToWordList;
 
-    return stemAndTokenize;
+  return stemAndTokenize;
 }
 
 /**
@@ -50,18 +51,18 @@ function getTokenizeAndStem(text) {
  * @returns {Map<any, any>} a map that map lemma to a list of words that could be stemmed to the lemma key
  */
 function buildStemToWordList(stemmer, wordList, stemList) {
-    let stemToWordList = new Map();
+  let stemToWordList = new Map();
 
-    stemList.forEach((stemKey) => stemToWordList.set(stemKey, []));
+  stemList.forEach((stemKey) => stemToWordList.set(stemKey, []));
 
-    wordList.forEach((word) => {
-        let stemmed = stemmer.stemWord(word);
-        if (stemToWordList.has(stemmed)) {
-            stemToWordList.get(stemmer.stemWord(word)).push(word);
-        }
-    });
+  wordList.forEach((word) => {
+    let stemmed = stemmer.stemWord(word);
+    if (stemToWordList.has(stemmed)) {
+      stemToWordList.get(stemmer.stemWord(word)).push(word);
+    }
+  });
 
-    return stemToWordList;
+  return stemToWordList;
 }
 
 /**
@@ -77,18 +78,18 @@ function buildStemToWordList(stemmer, wordList, stemList) {
  * @returns {{}} object to be returned
  */
 function getTextMetaInfo(text) {
-    let textMetaInfo = {};
+  let textMetaInfo = {};
 
-    textMetaInfo.text = text;
-    textMetaInfo.stemAndTokenize = getTokenizeAndStem(text);
+  textMetaInfo.text = text;
+  textMetaInfo.stemAndTokenize = getTokenizeAndStem(text);
 
-    textMetaInfo.individualStemCount = getIndividualWordCountFromWordList(
-        textMetaInfo.stemAndTokenize.stemList
-    );
+  textMetaInfo.individualStemCount = getIndividualWordCountFromWordList(
+    textMetaInfo.stemAndTokenize.stemList
+  );
 
-    textMetaInfo.totalStemCount = textMetaInfo.stemAndTokenize.stemList.length;
+  textMetaInfo.totalStemCount = textMetaInfo.stemAndTokenize.stemList.length;
 
-    return textMetaInfo;
+  return textMetaInfo;
 }
 
 /**
@@ -97,14 +98,14 @@ function getTextMetaInfo(text) {
  * @returns {Map<any, any>} word to word count map
  */
 function getIndividualWordCountFromWordList(wordList) {
-    let individualWordCount = new Map();
-    wordList.forEach((word) => {
-        individualWordCount.set(
-            word,
-            (individualWordCount.has(word) ? individualWordCount.get(word) : 0) + 1
-        );
-    });
-    return individualWordCount;
+  let individualWordCount = new Map();
+  wordList.forEach((word) => {
+    individualWordCount.set(
+      word,
+      (individualWordCount.has(word) ? individualWordCount.get(word) : 0) + 1
+    );
+  });
+  return individualWordCount;
 }
 
 /**
@@ -113,9 +114,9 @@ function getIndividualWordCountFromWordList(wordList) {
  * @returns {*[]} a string array contains words sorted by its count
  */
 function getSortedKeys(individualWordCount) {
-    return [...individualWordCount.keys()].sort((word1, word2) => {
-        return individualWordCount.get(word2) - individualWordCount.get(word1);
-    });
+  return [...individualWordCount.keys()].sort((word1, word2) => {
+    return individualWordCount.get(word2) - individualWordCount.get(word1);
+  });
 }
 
 /**
@@ -126,14 +127,11 @@ function getSortedKeys(individualWordCount) {
  *
  */
 function getKeywordsFromPreprocessedText(textMetaInfo, numKeywords) {
-    numKeywords = Math.min(numKeywords, textMetaInfo.totalStemCount);
-    let sortedWords = getSortedKeys(textMetaInfo.individualStemCount);
-    return sortedWords
-        .map(
-            (stemmedKey) =>
-                textMetaInfo.stemAndTokenize.stemToWordList.get(stemmedKey)[0]
-        )
-        .slice(0, numKeywords);
+  numKeywords = Math.min(numKeywords, textMetaInfo.totalStemCount);
+  let sortedWords = getSortedKeys(textMetaInfo.individualStemCount);
+  return sortedWords
+    .map((stemmedKey) => textMetaInfo.stemAndTokenize.stemToWordList.get(stemmedKey)[0])
+    .slice(0, numKeywords);
 }
 
 /**
@@ -144,9 +142,9 @@ function getKeywordsFromPreprocessedText(textMetaInfo, numKeywords) {
  *
  */
 function getKeywordsFromText(text, numKeywords = 5) {
-    text = preprocess(text);
-    let textMetaInfo = getTextMetaInfo(text);
-    return getKeywordsFromPreprocessedText(textMetaInfo, numKeywords);
+  text = preprocess(text);
+  let textMetaInfo = getTextMetaInfo(text);
+  return getKeywordsFromPreprocessedText(textMetaInfo, numKeywords);
 }
 
-module.exports = {getKeywordsFromText};
+export { getKeywordsFromText };

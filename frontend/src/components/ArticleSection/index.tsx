@@ -3,9 +3,9 @@ import ArticleSection from './Summary';
 import Lens from '../Lens';
 import Sidebar from '../Sidebar';
 
-interface IArticleData {
+export interface IArticleData {
   title?: string;
-  date?: Date;
+  date?: string;
   author?: string;
   website?: string;
   body: string[];
@@ -17,7 +17,8 @@ interface ArticleProps extends IArticleData {
 
 export default function Article(props: ArticleProps) {
   const [readTime, setReadTime] = useState('');
-  const [keywords, setkeywords] = useState<string[]>([]);
+  const [keywords, setKeywords] = useState<string[]>([]);
+  const [summary, setSummary] = useState<string[]>([]);
 
   const pageTitle = props.title || props.website || 'No Title Found';
 
@@ -37,14 +38,35 @@ export default function Article(props: ArticleProps) {
   };
 
   const generateKeywords = () => {
-    const temp = props.body[0].split(' ');
-    setkeywords(['Examples:'].concat(temp.slice(0, 3)));
-    //TODO: connect with BE
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: props.body.join(), numOfKeywords: 3 }),
+    };
+
+    fetch('http://localhost:3000/keyword', requestOptions)
+      .then((res) => res.json())
+      .then((data) => setKeywords(data));
+  };
+
+  const generateSummary = () => {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ content: props.body.join(), length: 3 }),
+    };
+
+    fetch('http://localhost:3000/summary', requestOptions)
+      .then((res) => res.json())
+      .then((data) => {
+        setSummary(data.summarized_text);
+      });
   };
 
   useEffect(() => {
     generateReadTime();
     generateKeywords();
+    generateSummary();
   }, []);
 
   return (
@@ -81,6 +103,7 @@ export default function Article(props: ArticleProps) {
           <h6>{readTime}</h6>
           <div>
             <h1>{pageTitle}</h1>
+            <h4>{props.date}</h4>
           </div>
           <div className="keywords">
             {keywords.map((keyword) => (
@@ -88,7 +111,7 @@ export default function Article(props: ArticleProps) {
             ))}
           </div>
           <Lens>
-            <ArticleSection text={props.body} />
+            <ArticleSection text={summary} />
           </Lens>
         </div>
       </div>

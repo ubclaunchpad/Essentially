@@ -41,9 +41,7 @@ export default function ArticleSection({ text }: { text: string[] }) {
       </section>
 
       <article className="a">
-        {text.map((textItem) => (
-          <p key={textItem}>{textItem}</p>
-        ))}
+          <p>{text}</p>
       </article>
 
       <section className="bottom-bar">
