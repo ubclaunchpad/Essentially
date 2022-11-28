@@ -4,7 +4,12 @@
 
 > ##### _Only read the essentials_
 
-[TOC]
+# Table of Contents
+- [About Essentially](#About-Essentially)
+- [Getting Started](#Getting-Started)
+- [Screenshots](#Screenshots)
+- [Roadmap](#Roadmap)
+- [Contributing](#Contributing)
 
 ## About Essentially
 
