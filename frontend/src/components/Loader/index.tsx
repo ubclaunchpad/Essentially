@@ -15,14 +15,14 @@ export default function Loader() {
           <h6>Extracting relevant text</h6>
         </div>
 
-        <div className="progressbar" style={{ animationDelay: '10s' }}>
+        <div className="progressbar" style={{ animationDelay: '4s' }}>
           <h6>Analyzing text</h6>
         </div>
 
-        <div className="progressbar" style={{ animationDelay: '20s' }}>
+        <div className="progressbar" style={{ animationDelay: '8s' }}>
           <h6>Finding keywords</h6>
         </div>
-        <div className="progressbar" style={{ animationDelay: '30s' }}>
+        <div className="progressbar" style={{ animationDelay: '12s' }}>
           <h6>Generating smart summary</h6>
         </div>
       </div>

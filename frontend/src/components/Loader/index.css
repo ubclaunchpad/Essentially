@@ -17,7 +17,7 @@
     justify-content: flex-start;
     color: #191b43;
     background-position: right;
-    animation: makeItfadeIn 10s ease-in 0s forwards;
+    animation: makeItfadeIn 4s ease-in 0s forwards;
     background: linear-gradient( to right, var(--extension-secondary) 50%, var(--extension-primary) 50%);
     border: 1px solid var(--extension-primary);
     background-size: 200% 100%;
