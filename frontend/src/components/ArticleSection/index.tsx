@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import ArticleSection from './Summary';
 import Lens from '../Lens';
 import Sidebar from '../Sidebar';
+import Loader from '../Loader';
 
 export interface IArticleData {
   title?: string;
@@ -20,10 +21,16 @@ export default function Article(props: ArticleProps) {
   const [keywords, setKeywords] = useState<string[]>([]);
   const [summary, setSummary] = useState<string[]>([]);
 
-  const pageTitle = props.title || props.website || 'No Title Found';
+  const pageTitle = props.title || props.website || '';
 
   const generateReadTime = () => {
-    const readInMinutes = props.body.join().split(' ').length / 200;
+    const text: string[] = summary;
+
+    if (!text || text.length == 0) {
+      return;
+    }
+
+    const readInMinutes = text.join().split(' ').length / 200;
     if (readInMinutes < 1) {
       setReadTime('less than a minute');
     } else if (readInMinutes > 60) {
@@ -59,15 +66,28 @@ export default function Article(props: ArticleProps) {
     fetch('http://localhost:3000/summary', requestOptions)
       .then((res) => res.json())
       .then((data) => {
-        setSummary(data.summarized_text);
+        setSummary([data.summarized_text]);
       });
   };
 
   useEffect(() => {
-    generateReadTime();
     generateKeywords();
     generateSummary();
   }, []);
+
+  useEffect(() => {
+    generateReadTime();
+  }, [summary]);
+
+  if (summary.length == 0) {
+    return (
+      <div className="popup">
+        <div className="main page">
+          <Loader />{' '}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="popup">
