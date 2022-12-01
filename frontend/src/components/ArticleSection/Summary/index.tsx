@@ -41,12 +41,8 @@ export default function ArticleSection({ text }: { text: string[] }) {
       </section>
 
       <article className="a">
-          <p>{text}</p>
+        <p>{text}</p>
       </article>
-
-      <section className="bottom-bar">
-        <button></button>
-      </section>
     </div>
   );
 }
