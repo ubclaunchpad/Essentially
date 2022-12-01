@@ -1,13 +1,16 @@
-html,
-body {
+#launchpad-essentially-html {
     background: none;
 }
 
-main {
+#launchpad-essentially-body {
+    background: none;
+}
+
+/* main {
     padding: 0;
     margin: 0;
     border-radius: 10px;
-}
+} */
 
 #essentially-extension-v1-lp {
     padding: 0;
