@@ -9,6 +9,7 @@ export interface IArticleData {
   date?: string;
   author?: string;
   website?: string;
+  icon?: string;
   body: string[];
 }
 
