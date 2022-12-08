@@ -9,60 +9,35 @@ function addstylesheet(filename) {
 
 addstylesheet('styles.css');
 
+function selectQualifiedContentFromDOM(selectors, qualifiedName) {
+    const resHTML = document.querySelector(selectors);
+    return resHTML == null ? undefined : resHTML.getAttribute(qualifiedName);
+}
+
 function getPageText() {
+    let dateSearch = selectQualifiedContentFromDOM('meta[property*="time"]', "content");
+    const date = dateSearch == null ? "" : new Date(dateSearch).toLocaleDateString();
 
-    let title = "";
+    let authorSearch = selectQualifiedContentFromDOM('meta[name*="author"]', "content");
+    const author = authorSearch ?? "";
 
-    const titleHTML = document.querySelector('meta[name="title"], meta[itemprop="title"], meta[name="name"], meta[itemprop="name"], meta[name="headline"]');
-    if (titleHTML) {
-        title = titleHTML.getAttribute("content");
-    }
+    let titleSearch = selectQualifiedContentFromDOM('meta[name*="title"], meta[property*="title"]', "content");
+    const title = titleSearch ?? document.title;
 
-    let website = "";
-
-    const websiteHTML = document.querySelector('meta[property*="site_name"], meta[name="application-name"]');
-
-    if (websiteHTML) {
-        website = websiteHTML.getAttribute("content");
-    }
-
-    let description = "";
-
-    const descriptionHTML = document.querySelector('meta[name="description"], meta[itemProp="description"]');
-
-    if (descriptionHTML) {
-        description = descriptionHTML.getAttribute("content");
-    }
-
-    let date = "";
-
-    const dateHTML = document.querySelector('meta[itemProp="datePublished"]');
-    if (dateHTML) {
-        date = dateHTML.getAttribute("content");
-    }
+    let iconSearch = selectQualifiedContentFromDOM('link[rel*="icon"]', "href");
+    const icon = iconSearch ?? "/favicon.ico";
 
     const allText = Array.from(document.body.getElementsByTagName('p')).map(
-        (e) => e.innerHTML
+        (e) => e.innerText
     );
-
-    let body = [];
-
-    for (const text of allText) {
-        const span_regex = /<span.*>/g;
-        const a_tag_regex = /<\/?a([^>])*>/g;
-
-        if (text.charAt(0) !== '<' && !span_regex.exec(text)) {
-            body.push(text.replaceAll(a_tag_regex, ''));
-        }
-    }
-
 
     return {
         title: title,
         date: date,
-        author: "",
-        website: website,
-        body: body
+        author: author,
+        website: window.location.href,
+        icon: icon,
+        body: allText
     };
 }
 
