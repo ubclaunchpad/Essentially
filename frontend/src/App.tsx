@@ -1,5 +1,4 @@
-
-import './App.css';
+import './App.scss';
 import { useState } from 'react';
 import ArticleSection from './components/ArticleSection/Summary';
 import Article, { IArticleData } from './components/ArticleSection/index';
