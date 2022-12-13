@@ -37,13 +37,18 @@ Run `deactivate` to deactivate the virtual environment.
 
 ## Tests
 
-To run all tests make sure you're in the summary_be directory and run `python -m unittest`
+To run all tests make sure you're in the summary_be directory and run `python -m coverage run -m unittest`
+
+To turn the coverage data into a report `python -m coverage report` and generate a webpage: `python -m coverage html`
 
 To create new tests, there are a few conventions that must be followed (in order for Python to detect it):
 
 1. Inside each subfolder within tests, there must be an empty `__init__.py`
 2. Each test class must have unittest.TestCase included
 3. The tests under the test class must start with `test_*.py`
+
+## Styling
+To reformat the code with [the Black code style](https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html), run `python -m black --force-exclude venv/ ./**/**/*.py`
 
 ## API Endpoints
 

@@ -17,3 +17,5 @@ six==1.16.0
 tqdm==4.64.1
 Werkzeug==2.2.2
 zipp==3.10.0
+coverage==6.5.0
+black==22.12.0

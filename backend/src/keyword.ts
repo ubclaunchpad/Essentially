@@ -2,7 +2,7 @@
 import { TokenizerEn, StopwordsEn, StemmerEn } from "@nlpjs/lang-en";
 
 const CHARACTER_PATTERN = /[^a-zA-Z ]/g;
-const HTML_CODE_PATTERN = /<\/?[^>]+(>|$)/g
+const HTML_CODE_PATTERN = /<\/?[^>]+(>|$)/g;
 
 /**
  * Preprocess input text, perform text cleaning
@@ -29,7 +29,9 @@ function getTokenizeAndStem(text) {
 
   const tokenizer = new TokenizerEn();
   const stopwords = new StopwordsEn();
-  stemAndTokenize.wordList = stopwords.removeStopwords(tokenizer.tokenize(text));
+  stemAndTokenize.wordList = stopwords.removeStopwords(
+    tokenizer.tokenize(text)
+  );
   const stemmer = new StemmerEn();
   stemAndTokenize.stemList = stemmer.stem(stemAndTokenize.wordList);
 
@@ -130,7 +132,10 @@ function getKeywordsFromPreprocessedText(textMetaInfo, numKeywords) {
   numKeywords = Math.min(numKeywords, textMetaInfo.totalStemCount);
   let sortedWords = getSortedKeys(textMetaInfo.individualStemCount);
   return sortedWords
-    .map((stemmedKey) => textMetaInfo.stemAndTokenize.stemToWordList.get(stemmedKey)[0])
+    .map(
+      (stemmedKey) =>
+        textMetaInfo.stemAndTokenize.stemToWordList.get(stemmedKey)[0]
+    )
     .slice(0, numKeywords);
 }
 

@@ -13,10 +13,10 @@ if os.path.isfile(secret_file):
 app = Flask(__name__)
 CORS(app)
 PORT = "8000"
-if 'PORT' in os.environ:
-    PORT = os.environ['PORT']
+if "PORT" in os.environ:
+    PORT = os.environ["PORT"]
 
 app.register_blueprint(summarization_route)
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=PORT, debug=True)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=PORT, debug=True)
