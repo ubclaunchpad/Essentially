@@ -35,7 +35,7 @@ The UI is bundled to be put in the extension folder. This provides flexibility t
 
 4. Click on `load unpacked` and select the `extension` Folder _(if already done this click the refresh button)_
 
-**To reload extension: repeat steps 2-4**
+**To reload extension: repeat only step 2**
 
 ###### Note
 
