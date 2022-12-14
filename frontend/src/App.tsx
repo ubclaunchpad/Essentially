@@ -106,9 +106,9 @@ function App() {
               </button>
             </nav>
 
-            <ArticleSection text={text} />
+            <ArticleSection text={text.body} />
             <section className="actions">
-              {!text.length && (
+              {!text.body.length && (
                   <button onClick={() => callExtension()}>SUMMARIZE</button>
               )}
             </section>

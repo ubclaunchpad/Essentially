@@ -1,4 +1,3 @@
-import "./index.css"
 import {useState} from "react";
 import ReferencePanel from "./panels/reference";
 import DefinePanel from "./panels/definition";

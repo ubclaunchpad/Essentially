@@ -1,5 +1,4 @@
 import {useState, useRef, useEffect} from 'react';
-import "./index.css"
 import LensHelper from "./lensHelper";
 
 type TextActions = "None" | "Google" | "Lens" | "Format" | "Define";

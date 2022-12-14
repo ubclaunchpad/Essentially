@@ -1,13 +1,12 @@
 // TODO: Configure TypeScript for the content scripts
-function addstylesheet(filename) {
-    var link = document.createElement('link');
-    link.href = chrome.runtime.getURL(filename);
-    link.type = 'text/css';
-    link.rel = 'stylesheet';
-    document.getElementsByTagName('head')[0].appendChild(link);
-}
-
-addstylesheet('styles.css');
+// function addstylesheet(filename) {
+//     var link = document.createElement('link');
+//     link.href = chrome.runtime.getURL(filename);
+//     link.type = 'text/css';
+//     link.rel = 'stylesheet';
+//     document.getElementsByTagName('head')[0].appendChild(link);
+// }
+// addstylesheet('styles.css');
 
 function selectQualifiedContentFromDOM(selectors, qualifiedName) {
     const resHTML = document.querySelector(selectors);
