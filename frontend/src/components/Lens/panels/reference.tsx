@@ -1,11 +1,53 @@
+import {PanelProps} from "../lensHelper";
+import {useEffect, useState} from "react";
 
 
+interface ReferenceInterface {
+    imageSource: string;
+    extract: string;
+    description: string;
+}
 
-export default function ReferencePanel() {
+export default function ReferencePanel(panelProps: PanelProps) {
+    const {selectionText} = panelProps
+    const [referenceData, setReferenceData] = useState<ReferenceInterface | undefined>(undefined)
 
-    return<div>
-            <h2>{"textSelection"}</h2>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+    async function fetchInformation() {
+        const result = await fetch(
+            `https://en.wikipedia.org/api/rest_v1/page/summary/${selectionText.replace(' ', '_')}`,
+            {
+                method: 'GET',
+            }
+        );
+        const response = await result.json();
+        try {
+            setReferenceData({
+                extract: response.extract, description: response.description, imageSource:
+                response.thumbnail.source
+            })
+        } catch (e) {
+            setReferenceData(undefined)
+        }
+    }
 
-    </div>
+    useEffect(() => {
+        fetchInformation();
+    }, []);
+
+
+    if (!referenceData) {
+        return <div>
+            <h2>No Results</h2>
+        </div>
+    }
+
+    return (<div className={"reference-panel"}>
+        <h2>{selectionText}</h2>
+        <div>
+        <p>
+            <img src={referenceData.imageSource} alt={referenceData.description}/>
+            {referenceData.extract}
+        </p>
+        </div>
+    </div>)
 }

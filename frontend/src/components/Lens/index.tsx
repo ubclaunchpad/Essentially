@@ -104,9 +104,6 @@ export default function Lens({children}: { children: JSX.Element }) {
                     </svg>
                     <section className={'reference'}>
                         <LensHelper textSelection={selectionText}/>
-                        <div>
-
-                        </div>
                     </section>
                 </div>
             )}
