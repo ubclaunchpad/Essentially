@@ -1,5 +1,6 @@
 import "./index.css"
 import {useEffect, useState} from "react";
+import ReferencePanel from "./panels/reference";
 interface IDef {
     definition: string;
     example: string;
@@ -15,13 +16,18 @@ interface IDefinition {
     meanings: { partofspeech: string; definitions: IDef[] }[];
 }
 
+
+export enum LensPanels {
+    REFERENCE= "reference",
+    DEFINE= "define",
+    BOOKS= "books",
+    MEDIA= "media",
+}
+
 export default function LensHelper({ textSelection }: { textSelection: string }) {
 
-
-    const [definition, setSelectionDefinition] = useState<
-        IDefinition | undefined
-    >(undefined);
-
+    const  [selectionPanel, setSelectionPanel] = useState<LensPanels>(LensPanels.REFERENCE);
+    const [definition, setSelectionDefinition] = useState<IDefinition | undefined>(undefined);
     const [res, setRest] = useState<any>()
 
     useEffect(() => {
@@ -49,19 +55,31 @@ export default function LensHelper({ textSelection }: { textSelection: string })
         setSelectionDefinition(def[0]);
     }
 
-
+    const chosenPanel = () => {
+        switch (selectionPanel) {
+            case LensPanels.BOOKS:
+            case LensPanels.DEFINE:
+            case LensPanels.MEDIA:
+                return <><h2>IN PROGRESS</h2></>;
+            case LensPanels.REFERENCE:
+                return  <ReferencePanel/>
+        }
+    }
 
     return (
-       <div className={"lens-panel"}>
-           <div className={"lens-panel-content"}>
-           <h2>{textSelection}</h2>
-           <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-           </div>
+        <div className={"lens-panel"}>
+            <div className={"lens-panel-content"}>
+            {chosenPanel()}
+            </div>
+            <div className={"choices"}>
+                {Object.entries(LensPanels).map((panel) => {
+                   return <button
+                       key={panel[0]}
+                       className={panel[1] === selectionPanel? "selected-panel": ""}
+                       onClick={() => setSelectionPanel(panel[1])}>{panel[1]}</button>
+                })}s
+            </div>
+        </div>
 
-       <div className={"choices"}>
-
-       </div>
-
-       </div>
     );
 }
