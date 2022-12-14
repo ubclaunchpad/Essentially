@@ -8,7 +8,11 @@ const routes = Router();
 
 routes.post("/summary", (req: express.Request, res: express.Response) => {
   if (!req.body || !req.body.content || !req.body.length) {
-    res.status(400).send("Invalid Request - Please supply some text and length to summarize.");
+    res
+      .status(400)
+      .send(
+        "Invalid Request - Please supply some text and length to summarize."
+      );
   }
 
   res.setTimeout(60000, () => {
@@ -42,7 +46,9 @@ routes.post("/summary", (req: express.Request, res: express.Response) => {
 
 routes.post("/keyword", (req: express.Request, res: express.Response) => {
   if (!req.body || !req.body.text) {
-    res.status(400).send("Invalid Request - Please supply some text extract keywords from.");
+    res
+      .status(400)
+      .send("Invalid Request - Please supply some text extract keywords from.");
   }
 
   res.setTimeout(60000, () => {
