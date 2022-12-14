@@ -1,6 +1,6 @@
 #definition-popup-hov {
     background-color: #ffffff;
-    box-shadow: 0px 2px 7px 1px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.15);
     border-radius: 3px;
     max-height: 140px;
     max-width: 380px;
@@ -23,7 +23,9 @@
     color: #191b43;
     background: transparent;
     border: none;
+    font-weight: bold;
     padding: 5px 8px;
+    font-size: 11px;
 }
 
 #definition-popup-hov .selected {
@@ -35,7 +37,7 @@
 }
 
 #definition-popup-hov .not-ready {
-    text-decoration: line-through;
+    color: gray;
 }
 
 #definition-popup-hov p {
@@ -92,7 +94,7 @@
     flex-direction: column;
     padding: 10px 0 0 0;
     justify-content: space-between;
-    height: 250px;
+    height: 200px;
     user-select: none;
     border: 2px solid var(--extension-secondary);
     border-radius: 8px;
@@ -121,9 +123,9 @@
     color: var(--extension-primary);
     border: 1px solid transparent;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 11px;
     padding: 2px 4px;
-    margin: 2px 5px;
+    margin: 1px 5px;
 }
 
 .choices  .selected-panel {
@@ -149,7 +151,7 @@
 }
 
 .reference-panel p {
-    font-size: 12px;
+    font-size: 11px;
     margin: 0;
     width: 100%;
     text-align: justify;

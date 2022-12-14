@@ -2,10 +2,12 @@
     --extension-tertiary: #191b43;
     --extension-secondary: #191b43;
     --extension-primary: #e9e9e9;
+    width: 100%;
 }
 
 html {
     font-family: 'Sora', sans-serif;
+    background-color: var(--extension-primary);
 }
 
 *::-webkit-scrollbar {
@@ -50,15 +52,16 @@ h2 {
     max-width: 450px;
     border-radius: 6px;
     margin: 10px;
-    font-size: 13px;
+    font-size: 11px;
     background-color: #ffffff;
-    line-height: 1.8;
     z-index: 20;
-    max-height: 350px;
+    max-height: 300px;
+    box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.15);
 }
 
 .article .a {
-    padding: 0 30px;
+    padding: 0 25px 12px;
+    text-align: justify;
     overflow-y: scroll;
     width: fit-content;
     min-width: 300px;
@@ -66,7 +69,7 @@ h2 {
 }
 
 .article p {
-    padding-top: 14px;
+    padding-top: 3px;
 }
 
 .article .bottom-bar {
@@ -142,14 +145,12 @@ h2 {
 
 .popup .main {
     min-width: fit-content;
-    width: 130px;
     position: sticky;
     top: 0;
     right: 0;
     border-radius: 6px;
     background-color: var(--extension-primary);
     box-shadow: 0px 2px 7px 1px rgba(0, 0, 0, 0.25);
-    max-height: inherit;
 }
 
 nav {
@@ -195,8 +196,6 @@ nav button {
     flex-direction: row;
     justify-content: flex-end;
     align-items: flex-start;
-    padding: 6px;
-    margin: 5px;
     max-height: 90vh;
 }
 
@@ -234,7 +233,7 @@ nav button {
 }
 
 .article-body h1 {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
 }
 
@@ -253,15 +252,13 @@ nav button {
 }
 
 .keywords p {
-    background-color: var(--extension-tertiary);
-    font-weight: 500;
-    font-size: 13px;
-    padding: 5px 15px;
-    margin: 0px 10px 0px 0px;
-    border: none;
-    outline: none;
-    border-radius: 10px;
-    color: var(--extension-primary);
+    border: 1px dashed var(--extension-tertiary);
+    font-weight: bold;
+    font-size: 10px;
+    padding: 3px 3px;
+    margin: 0px 5px 0px 0px;
+    border-radius: 5px;
+
 }
 
 .sidebar {

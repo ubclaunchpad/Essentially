@@ -65,9 +65,9 @@ export default function Lens({children}: { children: JSX.Element }) {
             ref.current.style.position = 'absolute';
             ref.current.style.left = 0 + 'px';
             ref.current.style.top =
-                rect.top - 40 - ref.current.offsetHeight < 0
+                rect.top - 20 - ref.current.offsetHeight < 0
                     ? 0 + 'px'
-                    : rect.top - 40 - ref.current.offsetHeight + 'px';
+                    : rect.top - 20 - ref.current.offsetHeight + 'px';
         }
     });
 
