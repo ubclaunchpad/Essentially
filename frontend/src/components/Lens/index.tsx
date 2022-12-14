@@ -87,10 +87,6 @@ export default function Lens({children}: { children: JSX.Element }) {
                         setOptions("Lens")
                     }}>Lens
                     </button>
-                    <button className={"not-ready"} onClick={() => {
-                        setOptions("Define")
-                    }}>Define
-                    </button>
                 </section>
             )}
             {runLens && selectionText && (

@@ -54,12 +54,15 @@
         margin: 10px;
     }
 
-    @keyframes slideInFromLeft {
+    @keyframes flowAnimation {
         0% {
             top: -100px;
         }
-        100% {
+        50% {
             top: -20px;
+        }
+        100% {
+            top: -100px;
         }
     }
 
@@ -69,7 +72,7 @@
         top: -5px;
         transform: translateX( -50%);
         z-index: -2;
-        animation: 20s linear 0s infinite slideInFromLeft;
+        animation: 10s linear 0s infinite flowAnimation;
         animation-timing-function: linear;
     }
 

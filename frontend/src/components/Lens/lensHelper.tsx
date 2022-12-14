@@ -9,18 +9,18 @@ export interface PanelProps {
 export enum LensPanels {
     REFERENCE= "reference",
     DEFINE= "define",
+    TRANSLATE= "translate",
     BOOKS= "books",
     MEDIA= "media",
 }
 
 export default function LensHelper({ textSelection }: { textSelection: string }) {
-
     const  [selectionPanel, setSelectionPanel] = useState<LensPanels>(LensPanels.REFERENCE);
-
     const chosenPanel = () => {
         switch (selectionPanel) {
             case LensPanels.BOOKS:
             case LensPanels.MEDIA:
+            case LensPanels.TRANSLATE:
                 return <><h2>IN PROGRESS</h2></>;
             case LensPanels.REFERENCE:
                 return  <ReferencePanel selectionText={textSelection}/>
@@ -43,6 +43,5 @@ export default function LensHelper({ textSelection }: { textSelection: string })
                 })}
             </div>
         </div>
-
     );
 }
