@@ -8,6 +8,10 @@ html {
     font-family: 'Sora', sans-serif;
 }
 
+*::-webkit-scrollbar {
+    width: 0;               /* width of the entire scrollbar */
+}
+
 button {
     color: white;
 }
@@ -50,11 +54,11 @@ h2 {
     background-color: #ffffff;
     line-height: 1.8;
     z-index: 20;
-    max-height: 400px;
+    max-height: 350px;
 }
 
 .article .a {
-    padding: 5px 36px;
+    padding: 0 30px;
     overflow-y: scroll;
     width: fit-content;
     min-width: 300px;
@@ -76,7 +80,7 @@ h2 {
 }
 
 .article .top-bar {
-    padding: 10px;
+    padding: 5px 10px;
     height: 35px;
     display: flex;
     flex-direction: row;
@@ -146,7 +150,6 @@ h2 {
     background-color: var(--extension-primary);
     box-shadow: 0px 2px 7px 1px rgba(0, 0, 0, 0.25);
     max-height: inherit;
-
 }
 
 nav {
@@ -226,6 +229,8 @@ nav button {
 
 .article-body {
     padding: 4px 5px 5px 20px;
+    display: flex;
+    flex-direction:column;
 }
 
 .article-body h1 {
