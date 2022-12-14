@@ -12,7 +12,7 @@ describe("Keyword Extraction", function () {
 
     it("find expected number of keyword", function () {
       const testString =
-          "I am trying to test my firebase security rules, using Typescript and Mocha, but I can't even run my test";
+        "I am trying to test my firebase security rules, using Typescript and Mocha, but I can't even run my test";
       expect(getKeywordsFromText(testString, 3).length).to.equal(3);
     });
 
@@ -22,7 +22,8 @@ describe("Keyword Extraction", function () {
     });
 
     it("word in the same semantic meaning but different form will be considered one", function () {
-      const testString = "These classes are not following class convention, class, classes";
+      const testString =
+        "These classes are not following class convention, class, classes";
       expect(getKeywordsFromText(testString, 1)[1]).to.not.equal("classes");
     });
   });
