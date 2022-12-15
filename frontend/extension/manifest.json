@@ -7,7 +7,8 @@
         "service_worker": "background.js"
     },
     "action": {
-        "default_title": "Click to show an alert"
+        "default_title": "Click to show an alert",
+        "default_popup": "build/index.html"
     },
     "icons": {
         "16": "icon.png",

@@ -21,7 +21,6 @@ export default function Article(props: ArticleProps) {
   const [readTime, setReadTime] = useState('');
   const [keywords, setKeywords] = useState<string[]>([]);
   const [summary, setSummary] = useState<string[]>([]);
-
   const pageTitle = props.title || props.website || '';
 
   const generateReadTime = () => {
@@ -124,11 +123,11 @@ export default function Article(props: ArticleProps) {
           <h6>{readTime}</h6>
           <div>
             <h1>{pageTitle}</h1>
-            <h4>{props.date}</h4>
+            <h6>{props.date}</h6>
           </div>
           <div className="keywords">
             {keywords.map((keyword) => (
-              <p key={keyword}>{keyword}</p>
+              <p key={keyword}>{keyword.toUpperCase()}</p>
             ))}
           </div>
           <Lens>

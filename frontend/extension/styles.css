@@ -1,23 +1,15 @@
-#launchpad-essentially-html {
-    background: none;
-}
-
-#launchpad-essentially-body {
-    background: none;
-}
-
-#essentially-extension-v1-lp {
-    padding: 0;
-    margin: 0;
-    top: 0;
-    right: 0;
-    width: 600px;
-    height: 100vh;
-    border: none;
-    z-index: 2147483647 !important;
-    position: fixed !important;
-    background-color: transparent;
-    margin: 0;
-    resize: both;
-    overflow: auto;
-}
+/*#essentially-extension-v1-lp {*/
+/*    padding: 0;*/
+/*    margin: 0;*/
+/*    top: 0;*/
+/*    right: 0;*/
+/*    width: 600px;*/
+/*    height: 100vh;*/
+/*    border: none;*/
+/*    z-index: 2147483647 !important;*/
+/*    position: fixed !important;*/
+/*    background-color: transparent;*/
+/*    margin: 0;*/
+/*    resize: both;*/
+/*    overflow: auto;*/
+/*}*/
