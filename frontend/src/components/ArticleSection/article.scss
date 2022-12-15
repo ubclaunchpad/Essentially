@@ -144,20 +144,37 @@
     margin: 0;
   }
 
-  .keywords {
+  .article-meta {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+  }
+
+  .article-meta p {
+    font-weight: bold;
+    padding: 2px;
+    margin: 0 5px 0 0;
+    border-radius: 5px;
+  }
+
+  .keywords {
+    display: flex;
+    flex-grow: 3;
     padding: 6px 0;
+    width: auto;
   }
 
   .keywords p {
     border: 1px solid var(--extension-tertiary);
-    font-weight: bold;
     font-size: 9px;
-    padding: 2px;
-    margin: 0 5px 0 0;
-    border-radius: 5px;
+  }
+
+  .extracted-article-meta {
+    margin: auto 0 auto auto;
+  }
+
+  .extracted-article-meta p {
+    font-size: 10px;
   }
 
   .popup .main {
