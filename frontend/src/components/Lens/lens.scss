@@ -1,158 +1,157 @@
 #launchpad-essentially {
-    #definition-popup-hov {
-        background-color: #ffffff;
-        box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.15);
-        border-radius: 3px;
-        max-height: 140px;
-        max-width: 380px;
-        margin: 10px;
-        user-select: none;
-        overflow: hidden;
-        font-size: 12px;
-        display: flex;
-        flex-direction: row;
-    }
+  #definition-popup-hov {
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.15);
+    border-radius: 3px;
+    max-height: 140px;
+    max-width: 380px;
+    margin: 10px;
+    user-select: none;
+    overflow: hidden;
+    font-size: 12px;
+    display: flex;
+    flex-direction: row;
+  }
 
-    #definition-popup-hov h6 {
-        font-weight: bold;
-        font-size: 15px;
-    }
+  #definition-popup-hov h6 {
+    font-weight: bold;
+    font-size: 15px;
+  }
 
-    #definition-popup {
-        max-width: 450px;
-    }
+  #definition-popup {
+    max-width: 450px;
+  }
 
-    #definition-popup-hov button {
-        outline: none;
-        color: #191b43;
-        background: transparent;
-        border: none;
-        font-weight: bold;
-        padding: 5px 8px;
-        font-size: 11px;
-    }
+  #definition-popup-hov button {
+    outline: none;
+    color: #191b43;
+    background: transparent;
+    border: none;
+    font-weight: bold;
+    padding: 5px 8px;
+    font-size: 11px;
+  }
 
-    #definition-popup-hov .selected {
-        outline: none;
-        color: #ffffff;
-        background: #191b43;
-        border: none;
-        padding: 2px 8px;
-    }
+  #definition-popup-hov .selected {
+    outline: none;
+    color: #ffffff;
+    background: #191b43;
+    border: none;
+    padding: 2px 8px;
+  }
 
-    #definition-popup-hov .not-ready {
-        color: gray;
-    }
+  #definition-popup-hov .not-ready {
+    color: gray;
+  }
 
-    #definition-popup-hov p {
-        padding: 5px;
-    }
+  #definition-popup-hov p {
+    padding: 5px;
+  }
 
-    .reference {
-        border-radius: 8px;
-        background-color: #ffffff;
-        margin: 10px;
-    }
+  .reference {
+    border-radius: 8px;
+    background-color: #ffffff;
+    margin: 10px;
+  }
 
-    @keyframes flowAnimation {
-        0% {
-            top: -100px;
-        }
-        50% {
-            top: -20px;
-        }
-        100% {
-            top: -100px;
-        }
+  @keyframes flowAnimation {
+    0% {
+      top: -100px;
     }
+    50% {
+      top: -20px;
+    }
+    100% {
+      top: -100px;
+    }
+  }
 
-    .connect {
-        left: 50%;
-        position: absolute;
-        top: -5px;
-        transform: translateX( -50%);
-        z-index: -2;
-        animation: 10s linear 0s infinite flowAnimation;
-        animation-timing-function: linear;
-    }
+  .connect {
+    left: 50%;
+    position: absolute;
+    top: -5px;
+    transform: translateX(-50%);
+    z-index: -2;
+    animation: 10s linear 0s infinite flowAnimation;
+    animation-timing-function: linear;
+  }
 
-    .lens-result {
-        position: relative;
-    }
+  .lens-result {
+    position: relative;
+  }
 
-    .lens-panel {
-        display: flex;
-        flex-direction: column;
-        padding: 5px 0 0 0;
-        justify-content: space-between;
-        height: 180px;
-        user-select: none;
-        border: 2px solid var(--extension-secondary);
-        border-radius: 8px;
-    }
+  .lens-panel {
+    display: flex;
+    flex-direction: column;
+    padding: 5px 0 0 0;
+    justify-content: space-between;
+    height: 180px;
+    user-select: none;
+    border: 2px solid var(--extension-secondary);
+    border-radius: 8px;
+  }
 
-    .lens-panel-content {
-        padding: 2px 10px;
-        width: inherit;
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        overflow-y: scroll;
+  .lens-panel-content {
+    padding: 2px 10px;
+    width: inherit;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+  }
+  .choices {
+    width: 100%;
+    padding: 2px 0;
+    background-color: #191b43;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
 
-    }
-    .choices {
-        width: 100%;
-        padding: 2px 0;
-        background-color: #191b43;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-    }
+  .choices button {
+    background: transparent;
+    color: var(--extension-primary);
+    border: 1px solid transparent;
+    font-weight: bold;
+    font-size: 10px;
+    padding: 2px 3px;
+    margin: 1px 5px;
+  }
 
-    .choices button {
-        background: transparent;
-        color: var(--extension-primary);
-        border: 1px solid transparent;
-        font-weight: bold;
-        font-size: 10px;
-        padding: 2px 3px;
-        margin: 1px 5px;
-    }
+  .choices .selected-panel {
+    border: 1px solid var(--extension-primary);
+    border-radius: 4px;
+  }
 
-    .choices .selected-panel {
-        border: 1px solid var(--extension-primary);
-        border-radius: 4px;
-    }
+  .reference-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: inherit;
+    flex-wrap: wrap;
+  }
 
-    .reference-panel {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        width: inherit;
-        flex-wrap: wrap;
-    }
+  .reference-panel div {
+    margin: 10px 0;
+  }
 
-    .reference-panel div {
-        margin: 10px 0;
-    }
+  .reference-panel h2 {
+    font-size: 12px;
+  }
 
-    .reference-panel h2 {
-        font-size: 12px;
-    }
+  .reference-panel p {
+    font-size: 11px;
+    margin: 0;
+    width: 100%;
+    text-align: justify;
+  }
 
-    .reference-panel p {
-        font-size: 11px;
-        margin: 0;
-        width: 100%;
-        text-align: justify;
-    }
-
-    .reference-panel div img {
-        margin: 0 0 10px 10px;
-        border-radius: 4px;
-        box-shadow: 0 2px 8px 1px rgba(0, 0, 0, 0.35);
-        float: right;
-        max-width: 130px;
-        height: fit-content;
-    }
+  .reference-panel div img {
+    margin: 0 0 10px 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px 1px rgba(0, 0, 0, 0.35);
+    float: right;
+    max-width: 130px;
+    height: fit-content;
+  }
 }

@@ -15,10 +15,13 @@ function selectQualifiedContentFromDOM(selectors, qualifiedName) {
 
 function getPageText() {
     let dateSearch = selectQualifiedContentFromDOM('meta[property*="time"]', "content");
-    const date = dateSearch == null ? "" : new Date(dateSearch).toLocaleDateString();
+    const date = (dateSearch == null ? new Date() : new Date(dateSearch)).toLocaleDateString();
+
+    let siteSearch = selectQualifiedContentFromDOM('meta[name*="site"]', "content");
+    const site = siteSearch ?? "@news";
 
     let authorSearch = selectQualifiedContentFromDOM('meta[name*="author"]', "content");
-    const author = authorSearch ?? "";
+    const author = authorSearch ?? site;
 
     let titleSearch = selectQualifiedContentFromDOM('meta[name*="title"], meta[property*="title"]', "content");
     const title = titleSearch ?? document.title;

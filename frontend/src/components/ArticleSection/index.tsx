@@ -123,12 +123,18 @@ export default function Article(props: ArticleProps) {
           <h6>{readTime}</h6>
           <div>
             <h1>{pageTitle}</h1>
-            <h6>{props.date}</h6>
           </div>
-          <div className="keywords">
-            {keywords.map((keyword) => (
-              <p key={keyword}>{keyword.toUpperCase()}</p>
-            ))}
+          <div className="article-meta">
+            <div className="keywords">
+              {keywords.map((keyword) => (
+                <p key={keyword}>{keyword.toUpperCase()}</p>
+              ))}
+            </div>
+            <div className="extracted-article-meta">
+              <p>
+                {props.author} | {props.date}
+              </p>
+            </div>
           </div>
           <Lens>
             <ArticleSection text={summary} />
