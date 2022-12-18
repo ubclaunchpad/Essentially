@@ -1,0 +1,109 @@
+@use 'variables';
+.top {
+    background-color: variables.$extension-secondary;
+    display: flex;
+    padding: 10px 10px;
+    h1 {
+        color: variables.$extension-primary;
+        font-size: 20px;
+        padding: 20px;
+    }
+}
+
+.webpage {
+    background-color: #ffffff;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.home {
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+    flex: 1;
+}
+
+.content {
+    h2 {
+        font-size: 15px;
+        padding: 20px;
+    }
+    flex: 1;
+    button {
+        background-color: variables.$extension-primary;
+        color: variables.$extension-secondary !important;
+        outline: none;
+        border: 1px solid transparent;
+        padding: 10px 20px;
+        margin: 5px;
+        border-radius: 4px;
+        max-width: fit-content;
+        &:hover {
+            border: 1px solid variables.$extension-secondary;
+            background-color: variables.$extension-secondary;
+            color: variables.$extension-primary !important;
+        }
+        &:disabled {
+            color: #7a7a7a !important;
+            &:hover {
+                border: 1px solid transparent;
+            }
+        }
+    }
+    display: flex;
+    flex-direction: row;
+    padding-top: 10px;
+    justify-content: space-between;
+    margin: 0;
+    textarea {
+        box-shadow: 0 0px 3px 1px rgba(0, 0, 0, 0.05);
+        border: 1px solid variables.$extension-secondary;
+        border-radius: 6px;
+        padding: 15px;
+        margin: 0 0 10px;
+        border-radius: 6px;
+        font-family: inherit;
+        min-width: 300px;
+        max-height: 600px;
+        max-width: 700px;
+        flex: 1;
+    }
+}
+
+.sources {
+    display: flex;
+    flex-direction: column;
+    margin: 0 10px;
+    padding-left: 30px;
+    flex: 1;
+    .source-item {
+        box-shadow: 0 0px 3px 1px rgba(0, 0, 0, 0.05);
+        border: 0;
+        border-radius: 6px;
+        padding: 15px;
+        margin: 10px 0 10px;
+        font-family: inherit;
+        max-width: 700px;
+        background-color: #ffffff;
+    }
+    p {
+        color: black;
+        font-size: 11px;
+    }
+    div.line {
+        background-color: variables.$extension-secondary;
+        height: 1px;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+}
+
+.input-options {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 0 20px;
+    margin: 10px;
+}
