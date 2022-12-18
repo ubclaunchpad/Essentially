@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Article from '../components/ArticleSection';
 import './index.scss';
 
@@ -11,10 +11,42 @@ const text = {
   body: [],
 };
 
+interface ServerStatus {
+  status: number;
+  message: string;
+  time: string | number;
+}
 export default function Home() {
   const [newSource, setNewSource] = useState<string>('');
   const [sources, setSources] = useState<string[]>([]);
   const [edit, setEdit] = useState(true);
+  const [serverStatus, setServerStatus] = useState<ServerStatus | undefined>();
+
+  const fetchServerStatus = async () => {
+    try {
+      const status = await fetch('http://localhost:3000/status', {
+        method: 'GET',
+      });
+      const res = await status.text();
+      const date = new Date();
+      setServerStatus({
+        status: status.status,
+        message: res,
+        time: `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,
+      });
+    } catch (e) {
+      const date = new Date();
+      setServerStatus({
+        status: 500,
+        message: 'Server is down',
+        time: `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,
+      });
+    }
+  };
+
+  useEffect(() => {
+    fetchServerStatus();
+  }, []);
 
   const content = () => {
     if (edit) {
@@ -30,6 +62,11 @@ export default function Home() {
 
             <div>
               <button
+                disabled={
+                  newSource.length > 3000 ||
+                  newSource.length === 0 ||
+                  sources.length >= 5
+                }
                 onClick={(e) => {
                   setSources((prev) => prev.concat([newSource]));
                   setNewSource('');
@@ -38,7 +75,7 @@ export default function Home() {
                 Add Text
               </button>
               <button
-                disabled={sources.length === 0}
+                disabled={sources.length === 0 || serverStatus?.status !== 200}
                 onClick={() => setEdit(false)}
               >
                 Summarize
@@ -85,6 +122,27 @@ export default function Home() {
       </div>
       <div className="home">
         <div className="content">{content()}</div>
+      </div>
+      <div className="footer">
+        <div className={'status '}>
+          <div>
+            <button
+              onClick={() => {
+                fetchServerStatus();
+              }}
+            >
+              Refresh
+            </button>
+            <p>last check was at {serverStatus?.time}</p>
+          </div>
+
+          <div>
+            <p>{serverStatus?.message}</p>
+            <p className={serverStatus?.status === 200 ? 'active' : 'inactive'}>
+              {serverStatus?.status}
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );

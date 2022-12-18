@@ -6,6 +6,15 @@ import fetch from "node-fetch";
 
 const routes = Router();
 
+routes.get("/status", async (req: express.Request, res: express.Response) => {
+  let status =( await fetch("http://127.0.0.1:8000/status")).status
+  if (status === 200) {
+    res.status(200).send("Server is active and everything is essentially running");
+  } else {
+    res.status(status).send("Main server is active but summary API is down");
+    }
+  });
+
 routes.post("/summary", (req: express.Request, res: express.Response) => {
   if (!req.body || !req.body.content || !req.body.length) {
     res
