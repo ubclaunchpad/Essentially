@@ -25,6 +25,14 @@ The UI is bundled to be put in the extension folder. This provides flexibility t
 
 3. the application will run on `http://localhost:8080/`
 
+## Running the app to test the summarization on web
+
+1. make sure you are in the `frontend` directory
+
+2. Run `npm run start:web` to run the application
+
+3. the application will run on `http://localhost:8080/`
+
 ## Running the UI as the extension on Chrome
 
 1. make sure you are in the `frontend` directory

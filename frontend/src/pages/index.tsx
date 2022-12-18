@@ -37,7 +37,12 @@ export default function Home() {
               >
                 Add Text
               </button>
-              <button onClick={() => setEdit(false)}>Summarize</button>
+              <button
+                disabled={sources.length === 0}
+                onClick={() => setEdit(false)}
+              >
+                Summarize
+              </button>
             </div>
           </div>
 
