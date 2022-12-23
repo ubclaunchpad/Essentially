@@ -1,17 +1,12 @@
 import { useEffect, useState } from 'react';
-import Article from '../components/ArticleSection';
 import './index.scss';
+import SummaryPage from './summaryPage';
+import TopBar from './topbar';
 
-const text = {
-  title: '',
-  date: '',
-  author: '',
-  website: '',
-  icon: '',
-  body: [],
-};
+export const WORD_COUNT_LIMIT = 250;
+export const TEXT_LIMIT = 4;
 
-interface ServerStatus {
+export interface ServerStatus {
   status: number;
   message: string;
   time: string | number;
@@ -53,73 +48,112 @@ export default function Home() {
       return (
         <>
           <div className="input-options">
+            <button
+              disabled={
+                newSource.split(' ').length > WORD_COUNT_LIMIT ||
+                newSource.length === 0 ||
+                sources.length >= TEXT_LIMIT
+              }
+              onClick={() => {
+                setSources((prev) => prev.concat([newSource]));
+                setNewSource('');
+              }}
+            >
+              Add Text
+            </button>
+            {newSource.length > 0 && (
+              <h5 className="wordcount">
+                {newSource.split(' ').length}/{WORD_COUNT_LIMIT}
+              </h5>
+            )}
+
             <textarea
               placeholder="text to add"
               onChange={(e) => {
                 setNewSource(e.target.value);
               }}
+              value={newSource}
             ></textarea>
-
-            <div>
-              <button
-                disabled={
-                  newSource.length > 3000 ||
-                  newSource.length === 0 ||
-                  sources.length >= 5
-                }
-                onClick={(e) => {
-                  setSources((prev) => prev.concat([newSource]));
-                  setNewSource('');
-                }}
-              >
-                Add Text
-              </button>
-              <button
-                disabled={sources.length === 0 || serverStatus?.status !== 200}
-                onClick={() => setEdit(false)}
-              >
-                Summarize
-              </button>
-            </div>
           </div>
 
-          <div className="sources">
-            {sources.map((el) => {
+          <div className="input-options">
+            {sources.map((el, index) => {
               return (
-                <div className="source-item" key={el}>
+                <div className="source-item" key={index}>
+                  <button
+                    onClick={() =>
+                      setSources((prev) =>
+                        prev.filter((source, i) => index !== i)
+                      )
+                    }
+                  >
+                    x
+                  </button>
                   <p>{el}</p>
                 </div>
               );
             })}
+            <button
+              disabled={sources.length === 0 || serverStatus?.status !== 200}
+              onClick={() => setEdit(false)}
+            >
+              Summarize
+            </button>
+
+            <h5 className="info">
+              {sources.length} / {TEXT_LIMIT}
+            </h5>
+            <h5 className="wordcount">
+              {sources.reduce(
+                (partialSum, a) => partialSum + a.split(' ').length,
+                0
+              )}
+            </h5>
           </div>
         </>
       );
     } else {
       return (
-        <div>
-          <div>
-            <button disabled>Rate</button>
-            <button disabled>Feedback</button>
-            <button onClick={() => setEdit(true)}>Redo</button>
-          </div>
-          <Article
-            title={text.title}
-            date={text.date}
-            author={text.author}
-            website={text.website}
-            body={sources}
-            close={close}
+        <>
+          <SummaryPage
+            text={sources}
+            navBack={() => setEdit(true)}
+            serverStatus={serverStatus}
           />
-        </div>
+          <div className="input-options">
+            {sources.map((el, index) => {
+              return (
+                <div className="source-item" key={index}>
+                  <p>{el}</p>
+                </div>
+              );
+            })}
+            <button
+              disabled={sources.length === 0 || serverStatus?.status !== 200}
+              onClick={() => setEdit(true)}
+            >
+              Edit
+            </button>
+
+            <h5 className="info">
+              {sources.length} / {TEXT_LIMIT}
+            </h5>
+            <h5 className="wordcount">
+              {sources.reduce(
+                (partialSum, a) => partialSum + a.split(' ').length,
+                0
+              )}
+            </h5>
+          </div>
+        </>
       );
     }
   };
 
   return (
     <div className="webpage">
-      <div className="top">
-        <h1>Essentially Test</h1>
-      </div>
+      <TopBar />
+
       <div className="home">
         <div className="content">{content()}</div>
       </div>
