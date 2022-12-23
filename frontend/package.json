@@ -13,7 +13,8 @@
         "start:dev": "webpack serve --config webpack/webpack.config.js --env env=dev",
         "start:web": "webpack serve --config webpack/webpack.config.js --env env=web",
         "start:prod:web": "webpack  --config webpack/webpack.config.js --env env=prodweb",
-        "start:prod": "webpack  --config webpack/webpack.config.js  --env env=prod",
+        "start:prod:extension": "webpack  --config webpack/webpack.config.js  --env env=prod",
+        "start:prod": "npm run start:prod:extension &&  npm run start:prod:web",
         "lint": "eslint \"./src/**/*.{js,jsx,ts,tsx,json}\"",
         "lint:fix": "eslint --fix \"./src/**/*.{js,jsx,ts,tsx,json}\"",
         "format": "prettier --write \"./src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\""
