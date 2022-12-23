@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
 import { ServerStatus } from '.';
-import Lens from '../components/Lens';
 import Loader from '../components/Loader';
 
 export default function SummaryPage({
@@ -70,11 +69,10 @@ export default function SummaryPage({
           ))}
         </div>
       )}
-      <Lens>
-        <div className="source-item">
-          <p>{summary.join(' ')}</p>
-        </div>
-      </Lens>
+      <div className="source-item">
+        <p>{summary.join(' ')}</p>
+      </div>
+
       <h5 className="wordcount">
         {summary.reduce((partialSum, a) => partialSum + a.split(' ').length, 0)}
       </h5>
