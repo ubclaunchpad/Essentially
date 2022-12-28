@@ -40,7 +40,9 @@ routes.post("/summary", (req: express.Request, res: express.Response) => {
         });
       });
   } catch (e: any) {
-    console.log(e);
+    res.status(500).send({
+      message: e.message,
+    });
   }
 });
 
@@ -55,7 +57,13 @@ routes.post("/keyword", (req: express.Request, res: express.Response) => {
     res.status(504).send("Server Timed Out.");
   });
 
-  res.send(getKeywordsFromText(req.body.text, req.body.numOfKeywords));
+  try {
+    res.send(getKeywordsFromText(req.body.text, req.body.numOfKeywords));
+  } catch (e: any) {
+    res.status(500).send({
+      message: e.message,
+    });
+  }
 });
 
 export default routes;

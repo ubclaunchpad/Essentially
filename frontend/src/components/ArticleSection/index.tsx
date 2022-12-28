@@ -48,7 +48,7 @@ export default function Article(props: ArticleProps) {
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text: props.body.join(), numOfKeywords: 3 }),
+      body: JSON.stringify({ text: props.body.join(' '), numOfKeywords: 3 }),
     };
 
     fetch('http://localhost:3000/keyword', requestOptions)
@@ -60,7 +60,7 @@ export default function Article(props: ArticleProps) {
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ content: props.body.join(), length: 3 }),
+      body: JSON.stringify({ content: props.body.join(' '), length: 3 }),
     };
 
     fetch('http://localhost:3000/summary', requestOptions)
