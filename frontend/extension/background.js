@@ -6,13 +6,16 @@ chrome.action.onClicked.addListener((tab) => {
 });
 
 chrome.runtime.onInstalled.addListener(async() => {
-    let url = chrome.runtime.getURL('build/tab/index.html');
-    let tab = await chrome.tabs.create({ url });
-    console.log(`Created tab ${tab.id}`);
+    chrome.contextMenus.create({
+        id: 'web',
+        title: 'Open Web app',
+        contexts: ['page'],
+    });
 });
 
-chrome.runtime.onMessage.addListener(receiver);
-
-function receiver(request, sender, sendResponse) {
-    console.log(request);
-}
+chrome.contextMenus.onClicked.addListener(async(info, tab) => {
+    if (tab) {
+        let url = chrome.runtime.getURL('build/tab/index.html');
+        return chrome.tabs.create({ url });
+    }
+});
