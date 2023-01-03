@@ -1,22 +1,22 @@
 import express from "express";
 import { Router } from "express";
 import { getKeywordsFromText } from "./keyword";
-import { ISummarizationData } from "../interface";
 import fetch from "node-fetch";
 
 const routes = Router();
 
 routes.post("/summary", (req: express.Request, res: express.Response) => {
   if (!req.body || !req.body.content || !req.body.length) {
-    res
-      .status(400)
-      .send(
-        "Invalid Request - Please supply some text and length to summarize."
-      );
+    res.status(400).send({
+      message:
+        "Invalid Request - Please supply some text and length to summarize.",
+    });
   }
 
   res.setTimeout(60000, () => {
-    res.status(504).send("Server Timed Out.");
+    res.status(504).send({
+      message: "Server Timed Out.",
+    });
   });
 
   try {
@@ -32,11 +32,23 @@ routes.post("/summary", (req: express.Request, res: express.Response) => {
     };
 
     fetch("http://127.0.0.1:8000/articles/summary", requestOptions)
-      .then((res) => res.json())
-      .then((data: ISummarizationData) => {
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        return Promise.reject(response);
+      })
+      .then((data) => {
         res.send({
           summarized_text: data.summarized_text,
           meta: data.Meta,
+        });
+      })
+      .catch((e: any) => {
+        e.json().then((json: any) => {
+          res.status(json.code).send({
+            message: json.message,
+          });
         });
       });
   } catch (e: any) {
