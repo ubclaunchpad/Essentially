@@ -1,6 +1,7 @@
 import express from "express";
 import { Router } from "express";
 import { getKeywordsFromText } from "./keyword";
+import { ISummarizationData } from "./interface";
 import fetch from "node-fetch";
 
 const routes = Router();
@@ -38,7 +39,7 @@ routes.post("/summary", (req: express.Request, res: express.Response) => {
         }
         return Promise.reject(response);
       })
-      .then((data) => {
+      .then((data: ISummarizationData) => {
         res.send({
           summarized_text: data.summarized_text,
           meta: data.Meta,
