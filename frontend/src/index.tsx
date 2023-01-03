@@ -1,5 +1,11 @@
 import App from './App';
 import { createRoot } from 'react-dom/client';
-const container = document.getElementById('root');
+import Home from './pages';
+const container = document.getElementById('launchpad-essentially');
 const root = createRoot(container!);
-root.render(<App />);
+
+if (process.env.name === 'web') {
+  root.render(<Home />);
+} else {
+  root.render(<App />);
+}

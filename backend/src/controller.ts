@@ -6,11 +6,23 @@ import fetch from "node-fetch";
 
 const routes = Router();
 
+routes.get("/status", async (req: express.Request, res: express.Response) => {
+  try {
+    let status = (await fetch("http://127.0.0.1:8000/status")).status;
+    if (status === 200) {
+      res.status(200).send("Everything is essentially running :)");
+    } else {
+      res.status(status).send("Essentially is active but Summary API is down :(");
+    }
+  } catch (e) {
+    res.status(500).send("Essentially is active but Summary API is down :(");
+  }
+});
+
 routes.post("/summary", (req: express.Request, res: express.Response) => {
   if (!req.body || !req.body.content || !req.body.length) {
     res.status(400).send({
-      message:
-        "Invalid Request - Please supply some text and length to summarize.",
+      message: "Invalid Request - Please supply some text and length to summarize.",
     });
   }
 
@@ -61,9 +73,7 @@ routes.post("/summary", (req: express.Request, res: express.Response) => {
 
 routes.post("/keyword", (req: express.Request, res: express.Response) => {
   if (!req.body || !req.body.text) {
-    res
-      .status(400)
-      .send("Invalid Request - Please supply some text extract keywords from.");
+    res.status(400).send("Invalid Request - Please supply some text extract keywords from.");
   }
 
   res.setTimeout(60000, () => {
