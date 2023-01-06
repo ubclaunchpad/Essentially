@@ -10,3 +10,9 @@ summarization_route = Blueprint("summarization_route", __name__)
 def get_summary():
     data = json.loads(request.data)
     return get_summary_service(data["content"]["text"], data["length"])
+
+
+@summarization_route.route("/status", methods=["GET"])
+def get_status():
+    return make_response({"message": "Active"}, 200)
+    

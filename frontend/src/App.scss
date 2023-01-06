@@ -2,72 +2,64 @@
 @import 'components/Lens/lens.scss';
 @import 'components/Loader/loader.scss';
 @import 'components/Sidebar/sidebar.scss';
-
-html {
-  font-family: 'Sora', sans-serif;
-  background-color: var(--extension-primary);
-  margin: 0;
-  padding: 0;
+:root {
+    --extension-tertiary: #191b43;
+    --extension-secondary: #191b43;
+    --extension-primary: #e9e9e9;
+    --article-dark: #585858;
+    --sidebar-dark: #383838;
 }
 
-body {
-  background-color: transparent;
-  pointer-events: none;
-  margin: 0;
-}
-
-* {
-  pointer-events: all;
-}
-
-*::-webkit-scrollbar {
-  width: 0; /* width of the entire scrollbar */
+#launchpad-essentially-html {
+    font-family: 'Sora', sans-serif;
+    background-color: var(--extension-primary);
+    margin: 0;
+    padding: 0;
+    body {
+        background-color: transparent;
+        pointer-events: none;
+        margin: 0;
+    }
 }
 
 #launchpad-essentially {
-  --extension-tertiary: #191b43;
-  --extension-secondary: #191b43;
-  --extension-primary: #e9e9e9;
-  --article-dark: #585858;
-  --sidebar-dark: #383838;
+  * {
+    pointer-events: all;
+  }
 
+  *::-webkit-scrollbar {
+    width: 0; /* width of the entire scrollbar */
+  }
   button {
     color: white;
   }
-
   h1 {
     font-size: 0.8rem;
     padding: 0;
     margin: 0;
   }
-
   h2 {
     font-size: 0.7rem;
     padding: 0;
     margin: 0;
   }
-
   h6 {
     font-size: 0.4rem;
     padding: 0;
     margin: 0;
   }
-
   .light {
       background-color: var(--extension-primary);
   }
-
   .dark {
     background-color: var(--extension-secondary);
     color: white;
     border-color: white;
   }
-
   .start {
     padding: 5px 0 15px;
     width: 200px;
   }
-
   .actions button {
     padding: 8px 12px;
     margin: 5px;
@@ -83,14 +75,12 @@ body {
         background-color: var(--extension-secondary);
     }
   }
-
   .actions {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
   }
-
   .popup {
     display: flex;
     flex-direction: row;
@@ -98,16 +88,13 @@ body {
     align-items: flex-start;
     max-height: 900px;
   }
-
   .settings {
     margin: 4px 7px;
   }
-
   .dropdown {
     display: flex;
     flex-direction: column;
   }
-
   .dropdown button {
     padding: 4px 10px;
     margin: 0;
@@ -122,8 +109,7 @@ body {
         color: white;
     }
   }
-
-  .dropdown > div {
+  .dropdown>div {
     margin: 5px 0;
     display: flex;
     flex-direction: column;

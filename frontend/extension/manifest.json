@@ -2,10 +2,17 @@
     "name": "Essentially",
     "version": "0.9",
     "manifest_version": 3,
-    "permissions": ["activeTab", "scripting", "notifications"],
+    "permissions": [
+        "activeTab",
+        "scripting",
+        "notifications",
+        "tabs",
+        "contextMenus"
+    ],
     "background": {
         "service_worker": "background.js"
     },
+
     "action": {
         "default_title": "Click to show an alert",
         "default_popup": "build/index.html"
@@ -17,7 +24,12 @@
         "128": "icon.png"
     },
     "web_accessible_resources": [{
-            "resources": ["styles.css"],
+            "resources": ["build/tab/bundle.js"],
+            "matches": ["<all_urls>"]
+        },
+
+        {
+            "resources": ["build/tab/index.html"],
             "matches": ["<all_urls>"]
         },
 

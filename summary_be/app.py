@@ -4,6 +4,7 @@ from flask_cors import CORS
 import dotenv
 
 from routes.summarization import summarization_route
+from error_handler.handlers import error_blueprint
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 secret_file = os.path.join(basedir, ".env")
@@ -16,6 +17,10 @@ PORT = "8000"
 if "PORT" in os.environ:
     PORT = os.environ["PORT"]
 
+# Error Handler
+app.register_blueprint(error_blueprint)
+
+# API routes registration
 app.register_blueprint(summarization_route)
 
 if __name__ == "__main__":

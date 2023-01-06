@@ -1,8 +1,16 @@
 import App from './App';
 import ThemeProvider from './context/ThemeContent'
 import { createRoot } from 'react-dom/client';
-const container = document.getElementById('root');
+import Home from './pages';
+const container = document.getElementById('launchpad-essentially');
 const root = createRoot(container!);
-root.render(<ThemeProvider>
-    <App />
-</ThemeProvider>);
+
+if (process.env.name === 'web') {
+  root.render(<ThemeProvider>
+      <Home />
+  </ThemeProvider>);
+} else {
+  root.render(<ThemeProvider>
+      <App />
+  </ThemeProvider>);
+}
