@@ -1,6 +1,5 @@
 #launchpad-essentially {
   #definition-popup-hov {
-    background-color: #ffffff;
     box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.15);
     border-radius: 3px;
     max-height: 140px;
@@ -11,6 +10,26 @@
     font-size: 12px;
     display: flex;
     flex-direction: row;
+    &.light {
+        background-color: #ffffff;
+        button {
+            color: #191b43;
+        }
+        .selected {
+            color: #ffffff;
+            background: var(--extension-secondary);
+        }
+    }
+    &.dark {
+        background-color: #000000;
+        button {
+            color: #ffffff;
+        }
+        .selected {
+            color: #000000;
+            background: var(--extension-primary);
+        }
+    }
   }
 
   #definition-popup-hov h6 {
@@ -24,7 +43,6 @@
 
   #definition-popup-hov button {
     outline: none;
-    color: #191b43;
     background: transparent;
     border: none;
     font-weight: bold;
@@ -34,8 +52,6 @@
 
   #definition-popup-hov .selected {
     outline: none;
-    color: #ffffff;
-    background: #191b43;
     border: none;
     padding: 2px 8px;
   }
@@ -87,8 +103,15 @@
     justify-content: space-between;
     height: 180px;
     user-select: none;
-    border: 2px solid var(--extension-secondary);
+    border: 2px solid;
     border-radius: 8px;
+    &.light {
+        border-color:  var(--extension-secondary);
+    }
+    &.dark {
+        background: var(--article-dark);
+        border-color:  var(--extension-primary)
+    }
   }
 
   .lens-panel-content {
@@ -99,18 +122,35 @@
     flex-wrap: wrap;
     overflow-y: scroll;
   }
+
   .choices {
     width: 100%;
     padding: 2px 0;
-    background-color: #191b43;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    &.light {
+        background-color: var(--extension-secondary);
+        button {
+            color: var(--extension-primary);
+        }
+        .selected-panel {
+           border-color: 1px solid var(--extension-primary);
+        }
+    }
+    &.dark {
+        background-color: var(--extension-primary);
+        button {
+           color: var(--extension-secondary);
+        }
+        .selected-panel {
+           border-color: 1px solid var(--extension-secondary);
+        }
+    }
   }
 
   .choices button {
     background: transparent;
-    color: var(--extension-primary);
     border: 1px solid transparent;
     font-weight: bold;
     font-size: 10px;
@@ -119,7 +159,7 @@
   }
 
   .choices .selected-panel {
-    border: 1px solid var(--extension-primary);
+    border: 1px solid;
     border-radius: 4px;
   }
 
