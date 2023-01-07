@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import ReferencePanel from './panels/reference';
 import DefinePanel from './panels/definition';
+import { ThemeContent } from '../../context/ThemeContent'
 
 export interface PanelProps {
   selectionText: string;
@@ -22,6 +23,7 @@ export default function LensHelper({
   const [selectionPanel, setSelectionPanel] = useState<LensPanels>(
     LensPanels.REFERENCE
   );
+  const theme = useContext(ThemeContent);
   const chosenPanel = () => {
     switch (selectionPanel) {
       case LensPanels.BOOKS:
@@ -40,9 +42,9 @@ export default function LensHelper({
   };
 
   return (
-    <div className={'lens-panel'}>
+    <div className={'lens-panel' + ' ' + theme.theme.toLowerCase()}>
       <div className={'lens-panel-content'}>{chosenPanel()}</div>
-      <div className={'choices'}>
+      <div className={'choices' + ' ' + theme.theme.toLowerCase()}>
         {Object.entries(LensPanels).map((panel) => {
           return (
             <button

@@ -1,5 +1,6 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useContext } from 'react';
 import LensHelper from './lensHelper';
+import { ThemeContent } from '../../context/ThemeContent'
 
 type TextActions = 'None' | 'Google' | 'Lens' | 'Format' | 'Define';
 
@@ -9,6 +10,7 @@ export default function Lens({ children }: { children: JSX.Element }) {
   const [runLens, setRunLens] = useState<boolean>(false);
   const [options, setOptions] = useState<TextActions>('None');
   const ref = useRef<HTMLElement>(null);
+  const theme = useContext(ThemeContent);
 
   useEffect(() => {
     if (options === 'Google' && selectionText) {
@@ -77,7 +79,11 @@ export default function Lens({ children }: { children: JSX.Element }) {
     <div id={DEFINITION_POPUP_ID}>
       {children}
       {selectionText && (
-        <section ref={ref} id={`${DEFINITION_POPUP_ID}-hov`}>
+        <section
+            className={theme.theme.toLowerCase()}
+            ref={ref}
+            id={`${DEFINITION_POPUP_ID}-hov`}
+        >
           <button
             className={options === 'Google' ? 'selected' : ''}
             onClick={() => {

@@ -1,11 +1,32 @@
 #launchpad-essentially {
-  .sidebar {
-    width: 50px;
-    background-color: var(--extension-secondary);
+  @mixin column {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+  }
+  .sidebar {
+
+    div {
+        @include column;
+        height: 20%;
+        width: 100%;
+    }
+
+    button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+    }
+
+    @include column;
+    width: 50px;
     padding: 20px 5px;
+    &.dark {
+        background-color: var(--sidebar-dark);
+    }
+    &.light {
+        background-color: var(--extension-secondary);
+    }
   }
 }
