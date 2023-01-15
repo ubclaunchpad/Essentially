@@ -5,15 +5,15 @@ interface ThemeContextInterface {
   updateTheme(newTheme: string): void;
 }
 
-const ThemeContent = React.createContext<ThemeContextInterface>({
-  theme: 'Dak',
+export const ThemeContent = React.createContext<ThemeContextInterface>({
+  theme: 'Dark',
   updateTheme: () => {
     return;
   },
 });
 
 export default function ThemeProvider({ children }: { children: JSX.Element }) {
-  const [theme, setTheme] = useState('s');
+  const [theme, setTheme] = useState('Light');
 
   const updateTheme = (newTheme: string) => {
     setTheme(newTheme);
