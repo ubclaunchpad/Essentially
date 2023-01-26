@@ -20,16 +20,17 @@ This folder contains the Backend for Summarization-related services. Written in 
    - `pip --version`
 3. Move to summary_be `cd summary_be`
 4. Create a virtual environment `python -m venv venv`
-5. Install dependencies `pip install -r requirements.txt`
-6. Must download the following using the command line by running the command `python -m nltk.downloader stopwords punkt wordnet omw-1.4`
-7. Create a `.env` file and add `PORT=8000` (8000 is just a value; you can set whichever you want)
+5. Activate virtual environment before installing dependencies: (Enable dependencies to be installed in the venv folder instead of globally)
+   - Windows: `venv\Scripts\activate`
+   - MacOS: `source venv/bin/activate`
+   - Linux: `source venv/bin/activate.csh`
+6. Install dependencies `pip install -r requirements.txt`
+7. Must download the following using the command line by running the command `python -m nltk.downloader stopwords punkt wordnet omw-1.4`
+8. Create a `.env` file and add `PORT=8000` (8000 is just a value; you can set whichever you want)
 
 ## Running the Server
 
-1. Activate the virtual environment:
-   - Windows: `venv\Scripts\activate`
-   - MacOS or Linux: `source venv/bin/activate`
-2. Start the Flask app by running `python app.py`
+Start the Flask app by running `python app.py`
 
 Note: If you need to install new Python packages, make sure you run `pip freeze > requirements.txt` so that other developers will know to download the package as well.
 
@@ -48,6 +49,7 @@ To create new tests, there are a few conventions that must be followed (in order
 3. The tests under the test class must start with `test_*.py`
 
 ## Styling
+
 To reformat the code with [the Black code style](https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html), run `python -m black --force-exclude venv/ ./**/**/*.py`
 
 ## API Endpoints
