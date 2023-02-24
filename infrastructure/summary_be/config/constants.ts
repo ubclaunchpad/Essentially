@@ -24,3 +24,5 @@ export const SUMMARY_BE_LAMBDA_HANDLERS = {
 };
 
 export const SUMMARY_BE_BASE_DIR = "/../../../summary_be/lambda_handlers";
+
+export const SUMMARY_LAYER_DIR = "";

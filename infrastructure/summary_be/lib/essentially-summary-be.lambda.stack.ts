@@ -1,12 +1,18 @@
 import * as cdk from "aws-cdk-lib";
 import { StackProps } from "aws-cdk-lib";
 import { DeploymentTarget } from "../config/deployment";
-import { Function, Code } from "aws-cdk-lib/aws-lambda";
+import {
+  Function,
+  Code,
+  LayerVersion,
+  ILayerVersion,
+} from "aws-cdk-lib/aws-lambda";
 import { APP_NAME, RESOURCE_ID } from "../config/constants";
 import { Construct } from "constructs";
 import {
   BACKEND_TO_DEPLOY_LAMBDAS,
   LambdaConfig,
+  LayerVersionConfig,
 } from "../config/lambda.config";
 
 interface EssentiallySummaryBackendLambdaStackProps extends StackProps {
@@ -26,20 +32,36 @@ export class EssentiallySummaryBackendLambdaStack extends cdk.Stack {
   ) {
     super(scope, id, props);
 
-    this.lambdas = {};
-
     for (const config of BACKEND_TO_DEPLOY_LAMBDAS) {
-      const functionCreated: Function = createLambdaFunction(this, config);
-      this.lambdas[config.componentName] = functionCreated;
+      const layers: ILayerVersion[] = [];
+      if (config.layers) {
+        config.layers.forEach((layer: LayerVersionConfig) => {
+          layers.push(createLambdaLayer(this, layer));
+        });
+      }
+      createLambdaFunction(this, config, layers);
     }
   }
 }
 
-function createLambdaFunction(scope: Construct, props: LambdaConfig) {
+function createLambdaLayer(scope: Construct, props: LayerVersionConfig) {
+  return new LayerVersion(scope, props.layerVersionName + RESOURCE_ID, {
+    code: Code.fromAsset(props.asset),
+    compatibleRuntimes: props.compatibleRuntimes,
+    layerVersionName: props.layerVersionName,
+  });
+}
+
+function createLambdaFunction(
+  scope: Construct,
+  props: LambdaConfig,
+  layers: ILayerVersion[]
+) {
   return new Function(scope, props.componentName + RESOURCE_ID, {
     functionName: props.functionName,
     code: Code.fromAsset(props.asset),
     handler: props.handler,
     runtime: props.runtime,
+    layers,
   });
 }
