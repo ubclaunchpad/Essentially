@@ -25,7 +25,7 @@ os.chdir(LAYER_NAME)
 subprocess.call("copy " + SUMMARIZATION_PY_DIR, shell=True)
 
 # step 3
-subprocess.call("pip install nltk -t .", shell=True)
+subprocess.call("pip install nltk -t . --upgrade", shell=True)
 
 # step 4
 subprocess.call("python -m nltk.downloader stopwords punkt wordnet omw-1.4 -d .", shell=True)
