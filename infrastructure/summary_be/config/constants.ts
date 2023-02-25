@@ -1,3 +1,6 @@
+import { ScriptInfo } from "./lambda.config";
+import * as path from "path";
+
 export const APP_NAME = {
   PREFIX: "Essentially-Summary-BE-",
 };
@@ -25,4 +28,19 @@ export const SUMMARY_BE_LAMBDA_HANDLERS = {
 
 export const SUMMARY_BE_BASE_DIR = "/../../../summary_be/lambda_handlers";
 
-export const SUMMARY_LAYER_DIR = "";
+// Map of LayerVersionName to Script Path that creates the layer
+export const LayerNamesToScripts: Record<string, ScriptInfo> = {
+  summaryLayer: {
+    path: path.join(__dirname, "../scripts/create_nltk_summarization_layer.py"),
+    filename: "create_nltk_summarization_layer.py",
+  },
+};
+
+const LAYERS_BASE_DIR = path.join(
+  __dirname,
+  "../../../summary_be/lambda_layers"
+);
+
+export const LayersDir: Record<string, string> = {
+  summaryLayer: path.join(LAYERS_BASE_DIR, "nltk_summarization_layer"),
+};

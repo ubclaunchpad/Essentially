@@ -14,6 +14,9 @@ import {
   LambdaConfig,
   LayerVersionConfig,
 } from "../config/lambda.config";
+import { LayerNamesToScripts } from "../config/constants";
+import { chdir } from "process";
+import { exec } from "child_process";
 
 interface EssentiallySummaryBackendLambdaStackProps extends StackProps {
   target: DeploymentTarget;
@@ -45,6 +48,17 @@ export class EssentiallySummaryBackendLambdaStack extends cdk.Stack {
 }
 
 function createLambdaLayer(scope: Construct, props: LayerVersionConfig) {
+  const { path, filename } = LayerNamesToScripts[props.layerVersionName];
+  chdir(path);
+  exec("python " + filename, (error, stdout, stderr) => {
+    if (error) {
+      console.error(`exec error: ${error}`);
+      return;
+    }
+    console.log(`stdout: ${stdout}`);
+    console.error(`stderr: ${stderr}`);
+  });
+
   return new LayerVersion(scope, props.layerVersionName + RESOURCE_ID, {
     code: Code.fromAsset(props.asset),
     compatibleRuntimes: props.compatibleRuntimes,
