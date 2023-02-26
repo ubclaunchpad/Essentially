@@ -5,6 +5,7 @@ import {
   SUMMARY_BE_BASE_DIR,
   SUMMARY_BE_LAMBDA_HANDLERS,
   LayersDir,
+  APP_NAME,
 } from "./constants";
 import * as path from "path";
 
@@ -27,9 +28,9 @@ export interface ScriptInfo {
   filename: string;
 }
 
-const BackendStatus: LambdaConfig = {
+const SummaryBEStatus: LambdaConfig = {
   componentName: COMPONENTS.status,
-  functionName: COMPONENTS.status + LAMBDA_NAMES.function,
+  functionName: APP_NAME + "_" + COMPONENTS.status + LAMBDA_NAMES.function,
   asset: path.join(__dirname, SUMMARY_BE_BASE_DIR),
   handler: COMPONENTS.status + "." + SUMMARY_BE_LAMBDA_HANDLERS.status,
   runtime: Runtime.PYTHON_3_9,
@@ -43,7 +44,7 @@ const SummaryLayer: LayerVersionConfig = {
 
 const Summary: LambdaConfig = {
   componentName: COMPONENTS.summary,
-  functionName: COMPONENTS.summary + LAMBDA_NAMES.function,
+  functionName: APP_NAME + "_" + COMPONENTS.summary + LAMBDA_NAMES.function,
   asset: path.join(__dirname, SUMMARY_BE_BASE_DIR),
   handler: COMPONENTS.summary + "." + SUMMARY_BE_LAMBDA_HANDLERS.summary,
   runtime: Runtime.PYTHON_3_9,
@@ -51,7 +52,7 @@ const Summary: LambdaConfig = {
 };
 
 export const BACKEND_TO_DEPLOY_LAMBDAS: LambdaConfig[] = [
-  BackendStatus,
+  SummaryBEStatus,
   Summary,
 ];
 
