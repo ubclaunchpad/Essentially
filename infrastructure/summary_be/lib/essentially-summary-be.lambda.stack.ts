@@ -50,14 +50,8 @@ export class EssentiallySummaryBackendLambdaStack extends cdk.Stack {
 function createLambdaLayer(scope: Construct, props: LayerVersionConfig) {
   const { path, filename } = LayerNamesToScripts[props.layerVersionName];
   chdir(path);
-  exec("python " + filename, (error, stdout, stderr) => {
-    if (error) {
-      console.error(`exec error: ${error}`);
-      return;
-    }
-    console.log(`stdout: ${stdout}`);
-    console.error(`stderr: ${stderr}`);
-  });
+  exec("python " + filename);
+  chdir(__dirname + "/..");
 
   return new LayerVersion(scope, props.layerVersionName + RESOURCE_ID, {
     code: Code.fromAsset(props.asset),

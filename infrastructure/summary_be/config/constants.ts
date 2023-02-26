@@ -31,7 +31,7 @@ export const SUMMARY_BE_BASE_DIR = "/../../../summary_be/lambda_handlers";
 // Map of LayerVersionName to Script Path that creates the layer
 export const LayerNamesToScripts: Record<string, ScriptInfo> = {
   summaryLayer: {
-    path: path.join(__dirname, "../scripts/create_nltk_summarization_layer.py"),
+    path: path.join(__dirname, "../../../summary_be/scripts"),
     filename: "create_nltk_summarization_layer.py",
   },
 };
