@@ -1,4 +1,5 @@
-import { Runtime, ILayerVersion } from "aws-cdk-lib/aws-lambda";
+import { Runtime } from "aws-cdk-lib/aws-lambda";
+import { Duration } from "aws-cdk-lib";
 import {
   COMPONENTS,
   LAMBDA_NAMES,
@@ -20,17 +21,13 @@ export interface LambdaConfig {
   asset: string;
   handler: string;
   runtime: Runtime;
+  timeout?: Duration;
   layers?: LayerVersionConfig[];
-}
-
-export interface ScriptInfo {
-  path: string;
-  filename: string;
 }
 
 const SummaryBEStatus: LambdaConfig = {
   componentName: COMPONENTS.status,
-  functionName: APP_NAME + "_" + COMPONENTS.status + LAMBDA_NAMES.function,
+  functionName: APP_NAME.PREFIX + COMPONENTS.status + LAMBDA_NAMES.function,
   asset: path.join(__dirname, SUMMARY_BE_BASE_DIR),
   handler: COMPONENTS.status + "." + SUMMARY_BE_LAMBDA_HANDLERS.status,
   runtime: Runtime.PYTHON_3_9,
@@ -44,10 +41,11 @@ const SummaryLayer: LayerVersionConfig = {
 
 const Summary: LambdaConfig = {
   componentName: COMPONENTS.summary,
-  functionName: APP_NAME + "_" + COMPONENTS.summary + LAMBDA_NAMES.function,
+  functionName: APP_NAME.PREFIX + COMPONENTS.summary + LAMBDA_NAMES.function,
   asset: path.join(__dirname, SUMMARY_BE_BASE_DIR),
   handler: COMPONENTS.summary + "." + SUMMARY_BE_LAMBDA_HANDLERS.summary,
   runtime: Runtime.PYTHON_3_9,
+  timeout: Duration.minutes(15),
   layers: [SummaryLayer],
 };
 

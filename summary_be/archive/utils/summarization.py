@@ -7,6 +7,12 @@ from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.corpus import stopwords
 
+nltk.data.path.append("/tmp")
+nltk.download("stopwords", download_dir="/tmp")
+nltk.download("punkt", download_dir="/tmp")
+nltk.download("wordnet", download_dir="/tmp")
+nltk.download("omw-1.4", download_dir="/tmp")
+
 INVALID = r"[^a-zA-Z\s]"
 STOP_WORDS = set(stopwords.words("english"))
 lemmatizer = WordNetLemmatizer()
