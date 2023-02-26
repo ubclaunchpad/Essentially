@@ -1,4 +1,4 @@
-from utils.summarization import summarize
+from nltk_summarization_layer.summarization import summarize
 
 def get_summary(event, context):
     text, num_sentences = event["content"]["text"], event["length"] or 3
