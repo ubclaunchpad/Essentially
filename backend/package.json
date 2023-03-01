@@ -1,14 +1,8 @@
 {
   "dependencies": {
-    "@mozilla/readability": "^0.4.2",
     "@nlpjs/lang-en": "^4.23.4",
-    "@types/isomorphic-fetch": "^0.0.36",
-    "aws-sdk": "^2.1323.0",
-    "aws-serverless-express": "^3.4.0",
-    "cors": "^2.8.5",
-    "express": "^4.18.2",
-    "jsdom": "^20.0.2",
-    "node-fetch": "^2.6.1"
+    "aws-lambda": "^1.0.7",
+    "aws-sdk": "^2.1323.0"
   },
   "scripts": {
     "build": "tsc",
@@ -17,10 +11,8 @@
     "format": "prettier --write \"./{src,test}/**/*.{js,jsx,ts,tsx,json,css,scss,md}\""
   },
   "devDependencies": {
-    "@types/aws-serverless-express": "^3.3.5",
+    "@types/aws-lambda": "^8.10.111",
     "@types/chai": "^4.3.4",
-    "@types/cors": "^2.8.12",
-    "@types/express": "^4.17.14",
     "@types/mocha": "^10.0.0",
     "@types/node": "^18.11.9",
     "babel-cli": "^6.26.0",

@@ -6,15 +6,13 @@ const lambda = new Lambda();
 export const handler = async (_event: APIGatewayProxyEvent, _context: Context): Promise<APIGatewayProxyResult> => {
   try {
     const response = await lambda.invoke({
-      FunctionName: 'test-lambda',
+      FunctionName: 'Essentially-Summary-BE-statusfunction',
       InvocationType: 'RequestResponse',
     }).promise()
 
-    console.log('response', response)
+    const payload = JSON.parse(response.Payload.toString())
 
-    const { StatusCode: status } = response
-    
-    console.log('response', status)
+    const status = payload.statusCode
 
     if (status === 200) {
         return {

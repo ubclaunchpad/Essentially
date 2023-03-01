@@ -3,9 +3,7 @@ import { getKeywordsFromText } from "./utils/keyword";
 
 export const handler = async (event: APIGatewayProxyEvent, _context: Context): Promise<APIGatewayProxyResult> => {
   try {
-    console.log('keyword route called')
     const body = JSON.parse(event.body)
-    console.log('body', body)
 
     if (!body || !body.text) {
       return {

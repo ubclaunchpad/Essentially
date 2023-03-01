@@ -37,30 +37,35 @@ export class EssentiallyBackendLambdaStack extends cdk.Stack {
     });
       
     for (const config of BACKEND_TO_DEPLOY_LAMBDAS) {
-      const lambdaRole = new Role(this, 'LambdaRole-' + config.componentName, {
-        assumedBy: new ServicePrincipal('lambda.amazonaws.com'),
-      });
+      if (config.resources) {
+        const lambdaRole = new Role(this, 'LambdaRole-' + config.componentName, {
+          assumedBy: new ServicePrincipal('lambda.amazonaws.com'),
+        });
 
-      const policy = new PolicyStatement({
-        actions: ['lambda:InvokeFunction'],
-        resources: config.resources,
-      });
+        const policy = new PolicyStatement({
+          actions: ['lambda:InvokeFunction'],
+          resources: config.resources,
+        });
 
-      lambdaRole.addToPolicy(policy);
+        lambdaRole.addToPolicy(policy);
 
-      const functionCreated: Function = createLambdaFunction(this, config, this.layer, lambdaRole);
-      this.lambdas[config.componentName] = functionCreated;
+        const functionCreated: Function = createLambdaFunction(this, config, this.layer, lambdaRole);
+        this.lambdas[config.componentName] = functionCreated;
+      } else {
+        const functionCreated: Function = createLambdaFunction(this, config, this.layer);
+        this.lambdas[config.componentName] = functionCreated;
+      }
     }
   }
 }
 
-function createLambdaFunction(scope: Construct, props: LambdaConfig, layer: LayerVersion, role: Role) {
+function createLambdaFunction(scope: Construct, props: LambdaConfig, layer: LayerVersion, role?: Role) {
   return new Function(scope, props.componentName + RESOURCE_ID, {
     functionName: props.functionName,
     code: Code.fromAsset(props.asset),
     handler: props.handler,
     runtime: props.runtime,
     layers: [layer],
-    role
+    ...(role && { role })
   });
 }

@@ -61,22 +61,13 @@ To set up your aws account for *Essentially Infrastructure*, please do the follo
 * `cdk deploy "*" --profile ${YOUR_DEPLOYMENT_TARGET_PROFILE} --require-approval never` Deploy all changes to the infrastructure without manually provision the process
 * `cdk destroy --all --profile ${YOUR_DEPLOYMENT_TARGET_PROFILE}` Destroy all stacks in the account
 
-## to deploy backend
-(don't need to automate this yet as we will do it in the pipeline)
-... or should I???
-- this will include node modules that are dev dependencies (can fix later in pipeline)
-
+## before deploying backend
 build backend code + lambda layer
 ```shell
 cd ../backend
 npm run build
 mkdir layers
 mkdir layers/nodejs
-cp package.json ./layers/nodejs/package.json
+jq '{dependencies}' package.json > ./layers/nodejs/package.json
 cd layers/nodejs && npm install
-```
-
-from infrastructure/backend
-```shell
-cdk deploy...
 ```
