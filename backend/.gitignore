@@ -1,3 +1,5 @@
 node_modules
 dist
 .nyc_output
+layers/nodejs/package.json
+layers/nodejs/package-lock.json
