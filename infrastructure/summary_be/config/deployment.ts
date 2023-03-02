@@ -6,10 +6,10 @@ export interface DeploymentTarget {
 }
 
 const ALPHA_ACCOUNT = {
-  name: 'alpha',
+  name: "alpha",
   account: process.env.CDK_DEFAULT_ACCOUNT,
   region: process.env.CDK_DEFAULT_REGION,
-  type: 'dev',
+  type: "dev",
 } as DeploymentTarget;
 
 export const deploymentTargets: DeploymentTarget[] = [ALPHA_ACCOUNT];

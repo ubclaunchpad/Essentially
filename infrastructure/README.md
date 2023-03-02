@@ -5,12 +5,13 @@ This is a blank project for CDK development with TypeScript for [Essentially](ht
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
 ## Before Setting Up
+
 - Make sure you are only making changes to the alpha account instead of the prod account unless you are allowed to do so.
 - This documentation applies to both `backend` and `summary_be` infrastructure directories. To perform operation based on this doc, make sure you are in one of those directories.
 
 ## Set Up
 
-To set up your aws account for *Essentially Infrastructure*, please do the following
+To set up your aws account for _Essentially Infrastructure_, please do the following
 
 ### Alpha AWS Account
 
@@ -23,20 +24,20 @@ To set up your aws account for *Essentially Infrastructure*, please do the follo
 2. Install AWS CLI
    following [this tutorial](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
 3. Run the `aws configure sso` command and provide your information
-    ```shell
-    $ aws configure sso
-    SSO session name: my-sso
-    SSO start URL [None]: https://my-sso-portal.awsapps.com/start
-    SSO region [None]: us-west-2
-    SSO registration scopes [None]: sso:account:access
-    ```
+   ```shell
+   $ aws configure sso
+   SSO session name: my-sso
+   SSO start URL [None]: https://my-sso-portal.awsapps.com/start
+   SSO region [None]: us-west-2
+   SSO registration scopes [None]: sso:account:access
+   ```
 4. Then it will open your browser and take you to the login page, if the login success, you will need to configure a
    profile
-    ```shell
-    CLI default client Region [None]: us-west-2
-    CLI default output format [None]: json
-    CLI profile name [None]: test-profile
-    ```
+   ```shell
+   CLI default client Region [None]: us-west-2
+   CLI default output format [None]: json
+   CLI profile name [None]: test-profile
+   ```
 5. Now you can log in from command line with either `aws sso login --sso-session my-sso`
    or `aws sso login --profile test-profile`
 6. Configure your local environment with `aws configure`, you can put nothing (just hit \<ENTER\>)
