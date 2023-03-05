@@ -6,7 +6,6 @@
   },
   "scripts": {
     "build": "tsc",
-    "start": "tsc && node dist/app.js",
     "test": "nyc mocha --require ts-node/register -R spec --ui bdd 'test/**/*.spec.ts' ",
     "format": "prettier --write \"./{src,test}/**/*.{js,jsx,ts,tsx,json,css,scss,md}\""
   },
