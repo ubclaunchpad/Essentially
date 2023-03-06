@@ -41,11 +41,10 @@ export const handler = async (event: APIGatewayProxyEvent, _context: Context): P
             body: payload.message 
         }
     }
-  } catch (error) {
-    console.log('error', error)
+  } catch {
     return {
       statusCode: 500,
-      body: JSON.stringify("Essentially is active but Summary API is down :(")
+      body: JSON.stringify("Essentially is active but the Summary API is down :(")
     }
   }
 };

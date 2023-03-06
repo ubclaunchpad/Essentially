@@ -71,3 +71,14 @@ mkdir layers/nodejs
 jq '{dependencies}' package.json > ./layers/nodejs/package.json
 cd layers/nodejs && npm install
 ```
+
+## calling the backend endpoints
+```shell
+# status
+curl -X GET 'https://xi9bq76tv2.execute-api.us-west-2.amazonaws.com/prod/status'
+# summary
+curl -X POST -d '{ "content": "insert content here", "length": 2 }' 'https://xi9bq76tv2.execute-api.us-west-2.amazonaws.com/prod/summary'
+# keyword
+curl -X POST -d '{ "text": "insert text here" }' 'https://xi9bq76tv2.execute-api.us-west-2.amazonaws.com/prod/keyword'
+```
+
