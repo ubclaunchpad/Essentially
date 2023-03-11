@@ -61,3 +61,25 @@ To set up your aws account for _Essentially Infrastructure_, please do the follo
 
 * `cdk deploy "*" --profile ${YOUR_DEPLOYMENT_TARGET_PROFILE} --require-approval never` Deploy all changes to the infrastructure without manually provision the process
 * `cdk destroy --all --profile ${YOUR_DEPLOYMENT_TARGET_PROFILE}` Destroy all stacks in the account
+
+## before deploying backend
+build backend code + lambda layer
+```shell
+cd ../backend
+npm run build
+mkdir layers
+mkdir layers/nodejs
+jq '{dependencies}' package.json > ./layers/nodejs/package.json
+cd layers/nodejs && npm install
+```
+
+## calling the backend endpoints
+```shell
+# status
+curl -X GET 'https://xi9bq76tv2.execute-api.us-west-2.amazonaws.com/prod/status'
+# summary
+curl -X POST -d '{ "content": "insert content here", "length": 2 }' 'https://xi9bq76tv2.execute-api.us-west-2.amazonaws.com/prod/summary'
+# keyword
+curl -X POST -d '{ "text": "insert text here" }' 'https://xi9bq76tv2.execute-api.us-west-2.amazonaws.com/prod/keyword'
+```
+
