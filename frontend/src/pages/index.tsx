@@ -19,7 +19,7 @@ export default function Home() {
 
   const fetchServerStatus = async () => {
     try {
-      const status = await fetch('http://localhost:3000/status', {
+      const status = await fetch('https://xi9bq76tv2.execute-api.us-west-2.amazonaws.com/prod/status', {
         method: 'GET',
       });
       const res = await status.text();

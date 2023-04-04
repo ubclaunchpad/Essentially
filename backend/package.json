@@ -6,6 +6,7 @@
   },
   "scripts": {
     "build": "tsc",
+    "build-lambda": "rm -rf layers && tsc && mkdir layers && mkdir layers/nodejs && jq '{dependencies}' package.json > ./layers/nodejs/package.json && cd layers/nodejs && npm install",
     "test": "nyc mocha --require ts-node/register -R spec --ui bdd 'test/**/*.spec.ts' ",
     "format": "prettier --write \"./{src,test}/**/*.{js,jsx,ts,tsx,json,css,scss,md}\""
   },

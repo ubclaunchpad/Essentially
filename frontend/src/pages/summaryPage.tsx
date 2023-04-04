@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { ServerStatus } from '.';
+import { v4 as uuidv4 } from 'uuid';
 import Loader from '../components/Loader';
 
 export default function SummaryPage({
@@ -16,21 +17,32 @@ export default function SummaryPage({
   const [keywords, setKeywords] = useState<string[]>([]);
   const [generateTime, setGenerateTime] = useState(0);
 
-  const generateSummary = useCallback(() => {
+  const generateSummary = useCallback(async () => {
     const time = Date.now();
     setSummaryIsLoading(true);
+    const summaryId = uuidv4();
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ content: text.join(), length: 3 }),
+      body: JSON.stringify({ content: text.join(), length: 3, summaryId: summaryId }),
     };
-    fetch('http://localhost:3000/summary', requestOptions)
+    const summaryPath = await fetch('https://xi9bq76tv2.execute-api.us-west-2.amazonaws.com/prod/summaryRequest', requestOptions)
       .then((res) => res.json())
       .then((data) => {
-        setSummary([data.summarized_text]);
-        setSummaryIsLoading(false);
-        setGenerateTime(Date.now() - time);
+        return data.summaryPath;
       });
+    const interval = setInterval(() => {
+      fetch(summaryPath).then((res) => {
+        if (res.status === 200) {
+          clearInterval(interval);
+          res.json().then(data => {
+            setSummary([data.summarized_text]);
+            setSummaryIsLoading(false);
+            setGenerateTime(Date.now() - time);
+          })
+        }
+      })
+    }, 100);
     generateKeywords();
   }, [text]);
 
@@ -41,7 +53,7 @@ export default function SummaryPage({
       body: JSON.stringify({ text: text.join(), numOfKeywords: 10 }),
     };
 
-    fetch('http://localhost:3000/keyword', requestOptions)
+    fetch('https://xi9bq76tv2.execute-api.us-west-2.amazonaws.com/prod/keyword', requestOptions)
       .then((res) => res.json())
       .then((data) => setKeywords(data));
   };
