@@ -42,7 +42,7 @@ export default function SummaryPage({
           })
         }
       })
-    }, 100);
+    }, 3000);
     generateKeywords();
   }, [text]);
 

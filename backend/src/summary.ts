@@ -4,7 +4,7 @@ import {
   Context,
 } from "aws-lambda";
 import { Lambda, S3 } from "aws-sdk";
-import { CORS_HEADER } from "./constants";
+import { CORS_HEADER, SUMMARY_S3_BASE_DOMAIN } from "./constants";
 
 const lambda = new Lambda();
 const s3 = new S3();
@@ -25,7 +25,7 @@ export const handler = async (
       statusCode: 400,
       headers: CORS_HEADER,
       body: JSON.stringify(
-        "Invalid Request - Please supply some text and length to summarize."
+        `Invalid Request: ${body.summaryId} - Please supply some text and length to summarize.`
       ),
     };
   }
@@ -62,10 +62,7 @@ export const handler = async (
     return {
       statusCode: 200,
       headers: CORS_HEADER,
-      body: JSON.stringify({
-        summarized_text: payload.summarized_text,
-        meta: payload.Meta,
-      }),
+      body: `Summary generated for request: ${body.summaryId} is ready at ${SUMMARY_S3_BASE_DOMAIN}/${body.summaryId}/summary.json`,
     };
   } else {
     return {

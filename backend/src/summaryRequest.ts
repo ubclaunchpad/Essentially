@@ -4,7 +4,7 @@ import {
   Context,
 } from "aws-lambda";
 import { Lambda } from "aws-sdk";
-import { CORS_HEADER } from "./constants";
+import { CORS_HEADER, SUMMARY_S3_BASE_DOMAIN } from "./constants";
 
 const lambda = new Lambda();
 
@@ -20,7 +20,7 @@ export const handler = async (
         statusCode: 400,
         headers: CORS_HEADER,
         body: JSON.stringify(
-          "Invalid Request - Please supply some text and length to summarize."
+          `Invalid Request: ${body.summaryId} - Please supply some text and length to summarize.`
         ),
       };
     }
@@ -43,7 +43,7 @@ export const handler = async (
       statusCode: 200,
       headers: CORS_HEADER,
       body: JSON.stringify({
-        summaryPath: `https://essentially-backend-s3st-essentiallybackendtestbu-1e6w7ixe3uqi0.s3.us-west-2.amazonaws.com/${body.summaryId}/summary.json`,
+        summaryPath: `${SUMMARY_S3_BASE_DOMAIN}/${body.summaryId}/summary.json`,
       }),
     };
   } catch {
