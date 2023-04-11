@@ -26,4 +26,10 @@ const KeywordAPI: ApiGatewayMethodConfig = {
   requestTemplates: REQUEST_TEMPLATES,
 }
 
-export const TO_DEPLOY_APIS: ApiGatewayMethodConfig[] = [BackendStatusAPI, SummaryAPI, KeywordAPI];
+const SummaryRequestAPI: ApiGatewayMethodConfig = {
+  componentName: COMPONENTS.summaryRequest,
+  methodType: API_GATEWAY_METHOD.POST,
+  requestTemplates: REQUEST_TEMPLATES,
+}
+
+export const TO_DEPLOY_APIS: ApiGatewayMethodConfig[] = [BackendStatusAPI, SummaryAPI, KeywordAPI, SummaryRequestAPI];
