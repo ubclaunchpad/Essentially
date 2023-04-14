@@ -16,7 +16,7 @@ def get_summary(event, context):
         }
 
     try:
-        result = summarize(text, num_sentences)
+        result = summarize(text)
         num_words = len(result.split(" "))
         return {
             "statusCode": 200,
