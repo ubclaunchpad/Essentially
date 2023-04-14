@@ -6,6 +6,7 @@ export const COMPONENTS = {
   status: "status",
   summary: "summary",
   keyword: "keyword",
+  summaryRequest: "summaryRequest",
 }
 
 export const RESOURCE_ID = "ID";

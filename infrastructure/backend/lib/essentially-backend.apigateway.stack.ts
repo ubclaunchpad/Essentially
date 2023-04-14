@@ -6,6 +6,7 @@ import { APP_NAME, RESOURCE_ID } from '../config/constants';
 import { Construct } from 'constructs';
 import { TO_DEPLOY_APIS } from '../config/apigateway.config';
 import * as apigateway from 'aws-cdk-lib/aws-apigateway';
+import { Cors } from 'aws-cdk-lib/aws-apigateway';
 
 export interface EssentiallyBackendApigatewayStackProps extends StackProps {
   target: DeploymentTarget;
@@ -31,6 +32,9 @@ export class EssentiallyBackendApigatewayStack extends cdk.Stack {
       {
         restApiName: SERVICE_NAME,
         description: 'Essentially '.concat(SERVICE_NAME),
+        defaultCorsPreflightOptions: {
+          allowOrigins: Cors.ALL_ORIGINS,
+        },
       }
     );
 
