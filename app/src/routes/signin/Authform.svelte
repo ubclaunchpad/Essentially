@@ -22,7 +22,7 @@
 	<section>
 		<h1>{isLogin ? 'Sign In' : 'Sign Up'}</h1>
 		<div class="social-auth">
-			<button on:click={signInWithGoogle}>Continue with Google</button>
+			<!-- <button on:click={signInWithGoogle}>Continue with Google</button> -->
 		</div>
 
 		<Divider />

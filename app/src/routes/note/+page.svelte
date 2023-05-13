@@ -1,8 +1,6 @@
 <script lang="ts">
 	import Start from './Start.svelte';
 	import Article from './Article.svelte';
-	const saveIcon = `src/assets/icons/save.svg`;
-	const shareIcon = `src/assets/icons/share.svg`;
 	let showSummary = true;
 </script>
 
@@ -22,8 +20,6 @@
 	<div class="flex">
 		<div />
 		<input type="text" placeholder="Ask anything" />
-		<!-- <button> <img src={saveIcon} alt="save icon" /></button>
-		<button> <img src={shareIcon} alt="share icon" /></button> -->
 	</div>
 </div>
 

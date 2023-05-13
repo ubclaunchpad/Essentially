@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Source from '$lib/components/source/Source.svelte';
 	import { onMount } from 'svelte';
-	const summaryIcon = `src/assets/icons/summary.svg`;
 	export let textInput = '';
 	let summary =
 		'Lord of the Flies is a novel by William Golding that explores the themes of human nature, power, and corruption. The story follows a group of young boys stranded on an uninhabited island after a plane crash as they attempt to establish a new society without adults. The book highlights the natural tendencies towards violence and corruption in humans and demonstrates how power can be corrupting. The novel also uses symbolism, such as the conch shell and the Lord of the Flies, to convey its themes. Ultimately, Lord of the Flies is a warning about the dangers of unchecked power, mob mentality, and the fragility of civilization. The book continues to be relevant today and its message is as powerful and poignant as it was when it was first published in 1954.';
@@ -53,7 +52,7 @@
 <div class="article-input">
 	<div class="topbar">
 		<h3>Lord of the Flies</h3>
-		<button on:click={generateSummary}><img src={summaryIcon} alt="summaryIcon" /></button>
+		<!-- <button on:click={generateSummary}><img src={summaryIcon} alt="summaryIcon" /></button> -->
 	</div>
 	<div class="article-body">
 		<Source sourceItem={{ title: 'about', content: articleTextBody }} />

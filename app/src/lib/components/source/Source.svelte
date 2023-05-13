@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { SourceItemI } from './Source';
-	const summaryIcon = `src/assets/icons/summary.svg`;
+	// const summaryIcon = `src/assets/icons/summary.svg`;
 	export let sourceItem: SourceItemI;
 
 	let isExpanded = true;
@@ -13,7 +13,7 @@
 <div class="source-item">
 	<div class="source">
 		<h4>{sourceItem.title}</h4>
-		<button on:click={toggleText}><img src={summaryIcon} /></button>
+		<!-- <button on:click={toggleText}><img src={summaryIcon} /></button> -->
 	</div>
 
 	{#if isExpanded}
