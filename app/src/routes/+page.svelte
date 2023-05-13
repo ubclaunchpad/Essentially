@@ -1,59 +1,65 @@
 <script>
-	import Counter from './Counter.svelte';
-	import welcome from '$lib/images/svelte-welcome.webp';
-	import welcome_fallback from '$lib/images/svelte-welcome.png';
+	import Button from '$lib/components/Buttons/Button.svelte';
+	import HashtagIcon from '$lib/components/icons/HashtagIcon.svelte';
 </script>
 
 <svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
+	<title>Essentially</title>
+	<script src="https://accounts.google.com/gsi/client" async defer></script>
+	<meta name="description" content="Essentially application" />
 </svelte:head>
 
 <section>
-	<h1>
-		<span class="welcome">
-			<picture>
-				<source srcset={welcome} type="image/webp" />
-				<img src={welcome_fallback} alt="Welcome" />
-			</picture>
-		</span>
+	<h1>Essentially Project</h1>
 
-		to your new<br />SvelteKit app
-	</h1>
+	<div class="links">
+		<Button type="icon">
+			<a
+				href="https://www.notion.so/Essentially-101fab9eeb674f3baab8fa8c4ce54426?pvs=4"
+				target="_blank"
+			>
+				<HashtagIcon />
+				<h6>Notion</h6>
+			</a>
+		</Button>
 
-	<h2>
-		try editing <strong>src/routes/+page.svelte</strong>
-	</h2>
+		<Button type="icon">
+			<a href="https://www.figma.com/files/project/92254476" target="_blank">
+				<HashtagIcon />
+				<h6>Figma</h6>
+			</a>
+		</Button>
 
-	<Counter />
+		<Button type="icon">
+			<a href="https://github.com/ubclaunchpad/Essentially" target="_blank">
+				<HashtagIcon />
+				<h6>Github</h6>
+			</a>
+		</Button>
+	</div>
 </section>
 
 <style>
 	section {
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
+		justify-content: flex-start;
 		align-items: center;
-		flex: 0.6;
+		flex: 1;
+		width: 100%;
+	}
+
+	.links {
+		border-radius: 40px;
+		border: 4px solid var(--color-border-1);
+		padding: 0.2rem 0.4rem;
+		column-gap: 2rem;
+		display: flex;
+		justify-content: space-between;
 	}
 
 	h1 {
-		width: 100%;
-	}
-
-	.welcome {
-		display: block;
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
-	}
-
-	.welcome img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		display: block;
+		font-size: 3rem;
+		font-weight: bold;
 	}
 </style>

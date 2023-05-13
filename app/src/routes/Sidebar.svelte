@@ -1,26 +1,49 @@
 <script>
 	import { page } from '$app/stores';
-	const historyIcon = `src/assets/icons/history.svg`;
-	const homeIcon = `src/assets/icons/home.svg`;
-	const savedIcon = `src/assets/icons/saved.svg`;
-	const profileIcon = `src/assets/icons/profile.svg`;
+	import Button from '$lib/components/Buttons/Button.svelte';
+	import ProfileIcon from '$lib/components/icons/ProfileIcon.svelte';
+	import SavedIcon from '$lib/components/icons/SavedIcon.svelte';
+	import SourcesIcon from '$lib/components/icons/SourcesIcon.svelte';
+	import SummaryIcon from '$lib/components/icons/SummaryIcon.svelte';
 </script>
 
 <div class="sidebar">
 	<section>
+		<Button type="icon"
+			><a href="./"
+				><SummaryIcon />
+				<h6>Essentially</h6></a
+			></Button
+		>
+	</section>
+	<section>
 		<nav>
 			<ul>
-				<li aria-current={$page.url.pathname === '/home' ? 'page' : undefined}>
-					<a href="/home"> <img src={homeIcon} alt="home icon" /></a>
+				<li aria-current={$page.url.pathname === '/note' ? 'page' : undefined}>
+					<Button type="icon"
+						><a href="./resources"
+							><SourcesIcon />
+							<h6>Resources</h6></a
+						></Button
+					>
 				</li>
-				<li aria-current={$page.url.pathname === '/history' ? 'page' : undefined}>
-					<a href="/history"><img src={historyIcon} alt="history icon" /></a>
-				</li>
+
 				<li aria-current={$page.url.pathname === '/saved' ? 'page' : undefined}>
-					<a href="/saved"> <img src={savedIcon} alt="saved icon" /></a>
+					<Button type="icon"
+						><a href="./files"
+							><SavedIcon />
+							<h6>Files</h6></a
+						></Button
+					>
 				</li>
+
 				<li aria-current={$page.url.pathname === '/account' ? 'page' : undefined}>
-					<a href="/account"> <img src={profileIcon} alt="profile icon" /></a>
+					<Button type="icon"
+						><a href="./account"
+							><ProfileIcon />
+							<h6>Account</h6></a
+						></Button
+					>
 				</li>
 			</ul>
 		</nav>
@@ -31,74 +54,59 @@
 	.sidebar {
 		display: flex;
 		flex-direction: column;
+		justify-content: flex-start;
+		padding: 2px;
+		z-index: 20;
+		row-gap: 3px;
+		border-right: 4px solid var(--color-bg-1);
+	}
 
-		justify-content: center;
-		padding: 10px;
+	.sidebar > :first-child {
+		height: 100%;
+		width: 100%;
+		justify-content: space-between;
 	}
 
 	section {
+		/* background-color: var(--color-bg-1); */
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		background-color: var(--color-border-1);
 		width: fit-content;
-		/* height: fit-content; */
-		flex: 1;
-		padding: 0px 0;
+		padding: 1rem 0;
 		border-radius: 5px;
-		box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+		box-shadow: rgba(149, 157, 165, 0.1) 0px 0px 10px;
 	}
 
 	nav {
 		padding: 0px 0;
 		display: flex;
+		flex-direction: column;
 		flex: 1;
-		justify-content: flex-start;
-		backdrop-filter: blur(25px) saturate(200%);
-		-webkit-backdrop-filter: blur(25px) saturate(200%);
-		background-color: rgba(255, 255, 255, 0.49);
+		justify-content: space-between;
 		border-radius: 5px;
-		border: 1px solid rgba(209, 213, 219, 0.3);
 	}
 
 	ul {
-		position: relative;
 		padding: 5px;
 		margin: 0;
 		display: flex;
 		flex-direction: column;
-		row-gap: 20px;
+		row-gap: 35px;
 		align-items: flex-start;
 		list-style: none;
 		justify-content: center;
-		background-size: contain;
 	}
 
 	li {
 		position: relative;
 		height: 100%;
-		width: 35px;
+		width: fit-content;
+		max-width: 100%;
 		height: 35px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		border-radius: 10px;
-	}
-
-	nav a {
-		display: flex;
-		text-align: left;
-		padding: 0 0.5rem;
-		font-weight: 600;
-		font-size: 0.8rem;
-		color: #000;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		text-decoration: none;
-		transition: color 0.2s linear;
-	}
-
-	a:hover {
-		color: var(--color-theme-1);
 	}
 </style>

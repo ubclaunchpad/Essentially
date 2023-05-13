@@ -5,7 +5,6 @@
 
 <div class="app">
 	<Sidebar />
-
 	<main>
 		<slot />
 	</main>
@@ -14,18 +13,18 @@
 <style>
 	.app {
 		display: flex;
-		flex-direction: row;
-		min-height: 100vh;
+		height: 100vh;
 	}
 
 	main {
+		position: relative;
 		flex: 1;
 		display: flex;
 		flex-direction: column;
 		padding: 1rem;
 		width: 100%;
-		/* max-width: 64rem; */
+		overflow-x: hidden;
 		margin: 0 auto;
-		height: 100vh;
+		height: 100%;
 	}
 </style>
